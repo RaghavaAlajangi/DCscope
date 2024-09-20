@@ -268,3 +268,57 @@ def test_user_defined_medium_should_work(qtbot):
     assert np.isnan(wsl.__getstate__()["emodulus"]["emodulus temperature"])
     assert wsl.__getstate__()["emodulus"]["emodulus medium"] == "MyMedium"
     assert wsl.__getstate__()["emodulus"]["emodulus scenario"] is None
+
+
+def test_changeable_lut_selection(qtbot):
+    mw = ShapeOut2()
+    qtbot.addWidget(mw)
+
+    # add fake measurement
+    path1 = make_dataset(medium="CellCarrier", temp=22.5, temp_range=[22, 23])
+
+    mw.add_dataslot(paths=[path1])
+    wsl = mw.widget_ana_view.widget_slot
+    ds = mw.pipeline.slots[0].get_dataset()
+
+    assert ds.config["setup"]["medium"] == "CellCarrier", "sanity check"
+    assert wsl.comboBox_medium.currentData() == "CellCarrier"
+
+    # set viscosity model manually
+    idvm = wsl.comboBox_visc_model.findText("buyukurganci-2022")
+    wsl.comboBox_visc_model.setCurrentIndex(idvm)
+    # set lut manually
+    idlut = wsl.comboBox_lut.findData("HE-2D-FEM-22")
+    wsl.comboBox_lut.setCurrentIndex(idlut)
+    qtbot.mouseClick(wsl.pushButton_apply, QtCore.Qt.LeftButton)
+    QtWidgets.QApplication.processEvents(QtCore.QEventLoop.AllEvents, 300)
+
+    # check LUT selection
+    assert wsl.comboBox_lut.currentData() == "HE-2D-FEM-22"
+
+    # check whether that worked
+    assert wsl.get_dataset(
+    ).config["calculation"]["emodulus lut"] == "HE-2D-FEM-22"
+    assert wsl.get_dataset(
+    ).config["calculation"]["emodulus viscosity model"] == "buyukurganci-2022"
+
+    # set different lut manually
+    idlut = wsl.comboBox_lut.findData("HE-3D-FEM-22")
+    wsl.comboBox_lut.setCurrentIndex(idlut)
+    qtbot.mouseClick(wsl.pushButton_apply, QtCore.Qt.LeftButton)
+    QtWidgets.QApplication.processEvents(QtCore.QEventLoop.AllEvents, 300)
+
+    # check new LUT selection
+    assert wsl.comboBox_lut.currentData() == "HE-3D-FEM-22"
+    # check whether that worked
+    assert wsl.get_dataset(
+    ).config["calculation"]["emodulus lut"] == "HE-3D-FEM-22"
+
+    # This is the actual test
+    assert wsl.comboBox_visc_model.currentText() == "buyukurganci-2022"
+    assert wsl.comboBox_lut.currentText() == "HE-3D-FEM-22"
+
+    try:
+        path1.unlink()
+    except BaseException:
+        pass

@@ -1,3 +1,5 @@
+2.18.2
+ - enh: enable lut selection for emodulus computation (#71)
 2.18.1
  - setup: bump dclab to 0.61.3 (replace rpy2 with wrapper) (#73 #161)
 2.18.0
