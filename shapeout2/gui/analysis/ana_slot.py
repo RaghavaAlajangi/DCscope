@@ -146,7 +146,7 @@ class SlotPanel(QtWidgets.QWidget):
             idx_vm = 1
         self.comboBox_visc_model.setCurrentIndex(idx_vm)
         # Set current state of the emodulus lut
-        idx_lut = self.comboBox_lut.findText(emodulus.get("emodulus lut", ""))
+        idx_lut = self.comboBox_lut.findData(emodulus.get("emodulus lut", ""))
         self.comboBox_lut.setCurrentIndex(idx_lut)
         # This has to be done after setting the scenario
         # (otherwise it might be overridden in the frontend)
@@ -370,9 +370,8 @@ class SlotPanel(QtWidgets.QWidget):
         tselec = self.comboBox_temp.currentData()
         medium_key = ALIAS_MEDIA.get(medium, medium)
         visc_model = self.comboBox_visc_model.currentText()
-        # Only show model and lut selection if we are dealing with MC-PBS
+        # Only show model selection if we are dealing with MC-PBS
         self.comboBox_visc_model.setVisible(medium_key.count("MC-PBS"))
-        self.comboBox_lut.setVisible(medium_key.count("MC-PBS"))
         self.doubleSpinBox_visc.setStyleSheet("")
         if medium in KNOWN_MEDIA:  # medium registered with dclab
             self.label_temp.setVisible(True)
