@@ -1,5 +1,6 @@
 import pkg_resources
 
+import dclab
 from dclab.features.emodulus.viscosity import KNOWN_MEDIA, SAME_MEDIA
 
 from PyQt5 import uic, QtCore, QtWidgets
@@ -33,20 +34,20 @@ class BulkActionEmodulus(QtWidgets.QDialog):
                     break
             else:
                 info = ""
-            self.comboBox_medium.addItem(name+info, name)
+            self.comboBox_medium.addItem(name + info, name)
 
         self.comboBox_medium.addItem("Not defined", "undefined")
         self.comboBox_medium.addItem("Unchanged", "unchanged")
 
         self.comboBox_medium.currentIndexChanged.connect(self.on_cb_medium)
-        self.comboBox_medium.setCurrentIndex(self.comboBox_medium.count()-1)
+        self.comboBox_medium.setCurrentIndex(self.comboBox_medium.count() - 1)
 
         self.comboBox_temp.clear()
         self.comboBox_temp.addItem("From feature", "feature")
         self.comboBox_temp.addItem("From meta data", "config")
         self.comboBox_temp.addItem("Manual", "manual")
         self.comboBox_temp.currentIndexChanged.connect(self.on_cb_temp)
-        self.comboBox_temp.setCurrentIndex(self.comboBox_temp.count()-1)
+        self.comboBox_temp.setCurrentIndex(self.comboBox_temp.count() - 1)
 
         self.comboBox_visc_model.clear()
         self.comboBox_visc_model.addItem("buyukurganci-2022",
@@ -54,6 +55,14 @@ class BulkActionEmodulus(QtWidgets.QDialog):
         self.comboBox_visc_model.addItem("herold-2017", "herold-2017")
         self.comboBox_visc_model.setCurrentIndex(0)
         self.comboBox_visc_model.currentIndexChanged.connect(self.on_cb_medium)
+
+        self.comboBox_lut.clear()
+        lut_dict = dclab.features.emodulus.load.get_internal_lut_names_dict()
+        for lut_id in lut_dict.keys():
+            self.comboBox_lut.addItem(lut_id, lut_id)
+        # Set default LUT
+        idx = self.comboBox_lut.findData("LE-2D-FEM-19")
+        self.comboBox_lut.setCurrentIndex(idx)
 
         # buttons
         btn_ok = self.buttonBox.button(QtWidgets.QDialogButtonBox.Ok)
@@ -92,6 +101,7 @@ class BulkActionEmodulus(QtWidgets.QDialog):
         """Set the given emodulus properties for all datasets"""
         medium = self.comboBox_medium.currentData()
         visc_model = self.comboBox_visc_model.currentData()
+        select_lut = self.comboBox_lut.currentData()
         if self.comboBox_temp.isEnabled():
             scen = self.comboBox_temp.currentData()
         else:
@@ -135,6 +145,8 @@ class BulkActionEmodulus(QtWidgets.QDialog):
             else:
                 if "emodulus viscosity model" in state["emodulus"]:
                     state["emodulus"].pop("emodulus viscosity model")
+
+            state["emodulus"]["emodulus lut"] = select_lut
 
             slot.__setstate__(state)
 
