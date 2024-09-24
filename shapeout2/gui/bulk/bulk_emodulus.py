@@ -101,7 +101,7 @@ class BulkActionEmodulus(QtWidgets.QDialog):
         """Set the given emodulus properties for all datasets"""
         medium = self.comboBox_medium.currentData()
         visc_model = self.comboBox_visc_model.currentData()
-        select_lut = self.comboBox_lut.currentData()
+        lut = self.comboBox_lut.currentData()
         if self.comboBox_temp.isEnabled():
             scen = self.comboBox_temp.currentData()
         else:
@@ -146,7 +146,7 @@ class BulkActionEmodulus(QtWidgets.QDialog):
                 if "emodulus viscosity model" in state["emodulus"]:
                     state["emodulus"].pop("emodulus viscosity model")
 
-            state["emodulus"]["emodulus lut"] = select_lut
+            state["emodulus"]["emodulus lut"] = lut
 
             slot.__setstate__(state)
 
