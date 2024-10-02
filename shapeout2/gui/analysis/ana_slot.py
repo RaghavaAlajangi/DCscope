@@ -295,7 +295,7 @@ class SlotPanel(QtWidgets.QWidget):
 
         choices = {"Herold (2017)": "herold-2017",
                    "Buyukurganci (2022)": "buyukurganci-2022"}
-        for name, data in choices:
+        for name, data in choices.items():
             self.comboBox_visc_model.addItem(name, data)
         self.comboBox_visc_model.blockSignals(False)
 
