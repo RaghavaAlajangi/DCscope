@@ -45,7 +45,13 @@ class QuickView(QtWidgets.QWidget):
         self.comboBox_hue.addItem("feature", "feature")
 
         # Set look-up table options for isoelasticity lines
-        self.update_lut_choices()
+        self.comboBox_lut.clear()
+        lut_dict = dclab.features.emodulus.load.get_internal_lut_names_dict()
+        for lut_id in lut_dict.keys():
+            self.comboBox_lut.addItem(lut_id, lut_id)
+        # Set LE-2D-FEM-19 as a default
+        idx = self.comboBox_lut.findData("LE-2D-FEM-19")
+        self.comboBox_lut.setCurrentIndex(idx)
 
         # settings button
         self.toolButton_event.toggled.connect(self.on_tool)
@@ -806,18 +812,6 @@ class QuickView(QtWidgets.QWidget):
             self.comboBox_x.update_feature_list(default_choice="area_um")
             self.comboBox_y.update_feature_list(default_choice="deform")
             self.comboBox_z_hue.update_feature_list()
-
-    def update_lut_choices(self):
-        """Updates the look-up table comboboxes choices"""
-        self.comboBox_lut.blockSignals(True)
-        self.comboBox_lut.clear()
-        lut_dict = dclab.features.emodulus.load.get_internal_lut_names_dict()
-        for lut_id in lut_dict.keys():
-            self.comboBox_lut.addItem(lut_id, lut_id)
-        # Set LE-2D-FEM-19 as a default
-        idx = self.comboBox_lut.findData("LE-2D-FEM-19")
-        self.comboBox_lut.setCurrentIndex(idx)
-        self.comboBox_lut.blockSignals(False)
 
     def update_polygon_panel(self):
         """Update polygon filter combobox etc."""
