@@ -9,7 +9,6 @@ from shapeout2.gui.main import ShapeOut2
 from shapeout2 import session
 import pytest
 
-
 datapath = pathlib.Path(__file__).parent / "data"
 
 
@@ -417,3 +416,49 @@ def test_subtract_background(qtbot):
             " Subtract Background-Checkbox is visible for dataset "
             " that don't contain \"image_bg\"-feature"
             )
+
+
+def test_isoelasticity_lines_with_lut_selection(qtbot):
+    """Test look-up table selection for isoelasticity lines"""
+
+    mw = ShapeOut2()
+    qtbot.addWidget(mw)
+
+    # add a dataslot
+    path = datapath / "calibration_beads_47.rtdc"
+    filt_id = mw.add_filter()
+    slot_ids = mw.add_dataslot(paths=[path])
+
+    assert len(mw.pipeline.slot_ids) == 1, "we added that"
+    assert len(mw.pipeline.filter_ids) == 1, "automatically added"
+
+    # activate a dataslot
+    slot_id = slot_ids[0]
+    em = mw.block_matrix.get_widget(slot_id, filt_id)
+    qtbot.mouseClick(em, QtCore.Qt.LeftButton, QtCore.Qt.ShiftModifier)
+
+    em = mw.block_matrix.get_widget(slot_id, filt_id)
+    qtbot.mouseClick(em, QtCore.Qt.LeftButton)
+
+    # did that work?
+    assert mw.toolButton_quick_view.isChecked()
+
+    # Get QuickView instance
+    qv = mw.widget_quick_view
+
+    # Open plot (settings) tool of QuickView
+    plot_tool = qv.toolButton_settings
+    qtbot.mouseClick(plot_tool, QtCore.Qt.LeftButton)
+
+    # Test if checkbox is visible and checked by default
+    assert qv.checkBox_isoelastics.isChecked(), "Checked by default"
+    # Test if default look-up table is selected
+    assert qv.comboBox_lut.currentData() == "LE-2D-FEM-19", "Check default LUT"
+
+    # Try changing look-up table
+    qv.comboBox_lut.setCurrentIndex(qv.comboBox_lut.findData("HE-2D-FEM-22"))
+    # Apply changes by clicking on 'Apply'
+    qtbot.mouseClick(qv.toolButton_apply, QtCore.Qt.LeftButton)
+
+    # did that work?
+    assert qv.comboBox_lut.currentData() == "HE-2D-FEM-22"
