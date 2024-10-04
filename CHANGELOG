@@ -1,4 +1,5 @@
 2.18.2
+ - enh: enable lut selection to plot isoelasticity lines (#71)
  - fix: allow to select R binary when not found automatically
  - enh: enable lut selection for emodulus computation in bulk actions (#71)
  - enh: enable lut selection for emodulus computation (#71)
