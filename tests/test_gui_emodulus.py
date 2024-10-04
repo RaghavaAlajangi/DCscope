@@ -285,7 +285,7 @@ def test_changeable_lut_selection(qtbot):
     assert wsl.comboBox_medium.currentData() == "CellCarrier"
 
     # set viscosity model manually
-    idvm = wsl.comboBox_visc_model.findText("buyukurganci-2022")
+    idvm = wsl.comboBox_visc_model.findData("buyukurganci-2022")
     wsl.comboBox_visc_model.setCurrentIndex(idvm)
     # set lut manually
     idlut = wsl.comboBox_lut.findData("HE-2D-FEM-22")
@@ -315,7 +315,7 @@ def test_changeable_lut_selection(qtbot):
     ).config["calculation"]["emodulus lut"] == "HE-3D-FEM-22"
 
     # This is the actual test
-    assert wsl.comboBox_visc_model.currentText() == "buyukurganci-2022"
+    assert wsl.comboBox_visc_model.currentData() == "buyukurganci-2022"
     assert wsl.comboBox_lut.currentText() == "HE-3D-FEM-22"
 
     try:
