@@ -89,8 +89,8 @@ class QuickViewScatterWidget(SimplePlotWidget):
 
     def plot_data(self, rtdc_ds, slot, xax="area_um", yax="deform",
                   xscale="linear", yscale="linear",  downsample=False,
-                  hue_type="none", hue_kwargs=None,
-                  isoelastics=False):
+                  hue_type="none", hue_kwargs=None, isoelastics=False,
+                  lut_identifier=None):
         self.rtdc_ds = rtdc_ds
         self.slot = slot
         self.xax = xax
@@ -170,7 +170,8 @@ class QuickViewScatterWidget(SimplePlotWidget):
                 axis_x=self.xax,
                 axis_y=self.yax,
                 channel_width=cfg["setup"]["channel width"],
-                pixel_size=cfg["imaging"]["pixel size"])
+                pixel_size=cfg["imaging"]["pixel size"],
+                lut_identifier=lut_identifier)
 
     def set_mouse_click_mode(self, mode):
         allowed = ["scatter", "poly-create", "poly-modify"]

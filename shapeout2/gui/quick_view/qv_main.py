@@ -44,6 +44,9 @@ class QuickView(QtWidgets.QWidget):
         self.comboBox_hue.addItem("KDE", "kde")
         self.comboBox_hue.addItem("feature", "feature")
 
+        # Set look-up table options for isoelasticity lines
+        self.update_lut_choices()
+
         # settings button
         self.toolButton_event.toggled.connect(self.on_tool)
         self.toolButton_poly.toggled.connect(self.on_tool)
@@ -98,6 +101,7 @@ class QuickView(QtWidgets.QWidget):
                                self.comboBox_z_hue,
                                self.comboBox_hue,
                                self.checkBox_hue,
+                               self.comboBox_lut
                                ]
         for w in self.signal_widgets:
             if hasattr(w, "currentIndexChanged"):
@@ -151,6 +155,7 @@ class QuickView(QtWidgets.QWidget):
             "scale x": self.comboBox_xscale.currentData(),
             "scale y": self.comboBox_yscale.currentData(),
             "isoelastics": self.checkBox_isoelastics.isChecked(),
+            "lut": self.comboBox_lut.currentData(),
             "marker hue": self.checkBox_hue.isChecked(),
             "marker hue value": self.comboBox_hue.currentData(),
             "marker hue feature": self.comboBox_z_hue.currentData(),
@@ -188,6 +193,8 @@ class QuickView(QtWidgets.QWidget):
             # scaling
             ("scale x", self.comboBox_xscale),
             ("scale y", self.comboBox_yscale),
+            # look up table
+            ("lut", self.comboBox_lut),
             # marker hue
             ("marker hue value", self.comboBox_hue),
             ("marker hue feature", self.comboBox_z_hue),
@@ -584,7 +591,8 @@ class QuickView(QtWidgets.QWidget):
                                           yscale=plot["scale y"],
                                           hue_type=hue_type,
                                           hue_kwargs=hue_kwargs,
-                                          isoelastics=plot["isoelastics"])
+                                          isoelastics=plot["isoelastics"],
+                                          lut_identifier=plot["lut"])
             # make sure the correct plot items are visible
             # (e.g. scatter select)
             self.on_tool()
@@ -798,6 +806,18 @@ class QuickView(QtWidgets.QWidget):
             self.comboBox_x.update_feature_list(default_choice="area_um")
             self.comboBox_y.update_feature_list(default_choice="deform")
             self.comboBox_z_hue.update_feature_list()
+
+    def update_lut_choices(self):
+        """Updates the look-up table comboboxes choices"""
+        self.comboBox_lut.blockSignals(True)
+        self.comboBox_lut.clear()
+        lut_dict = dclab.features.emodulus.load.get_internal_lut_names_dict()
+        for lut_id in lut_dict.keys():
+            self.comboBox_lut.addItem(lut_id, lut_id)
+        # Set LE-2D-FEM-19 as a default
+        idx = self.comboBox_lut.findData("LE-2D-FEM-19")
+        self.comboBox_lut.setCurrentIndex(idx)
+        self.comboBox_lut.blockSignals(False)
 
     def update_polygon_panel(self):
         """Update polygon filter combobox etc."""

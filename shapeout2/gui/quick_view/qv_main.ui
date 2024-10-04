@@ -367,14 +367,40 @@
          </layout>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBox_isoelastics">
-          <property name="text">
-           <string>Show isoelasticity lines</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <item>
+           <widget class="QCheckBox" name="checkBox_isoelastics">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Show isoelasticity lines</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBox_lut"/>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_9">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_10">
@@ -1101,22 +1127,6 @@
  </customwidgets>
  <resources/>
  <connections>
-  <connection>
-   <sender>checkBox_auto_apply</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>toolButton_apply</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>882</x>
-     <y>244</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>966</x>
-     <y>244</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>comboBox_hue</sender>
    <signal>currentIndexChanged(int)</signal>

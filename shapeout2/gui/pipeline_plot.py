@@ -299,7 +299,8 @@ class PipelinePlotItem(SimplePlotItem):
                                   axis_x=gen["axis x"],
                                   axis_y=gen["axis y"],
                                   channel_width=cfg["setup"]["channel width"],
-                                  pixel_size=cfg["imaging"]["pixel size"])
+                                  pixel_size=cfg["imaging"]["pixel size"],
+                                  lut_identifier=gen.get("lut", None))
             self._plot_elements += els
         # Modifications in log mode
         set_viewbox(self,
@@ -474,7 +475,8 @@ def add_contour(plot_item, plot_state, rtdc_ds, slot_state, legend=None):
     return elements
 
 
-def add_isoelastics(plot_item, axis_x, axis_y, channel_width, pixel_size):
+def add_isoelastics(plot_item, axis_x, axis_y, channel_width, pixel_size,
+                    lut_identifier=None):
     elements = []
     isodef = dclab.isoelastics.get_default()
     # We do not use isodef.get_with_rtdcbase, because then the
@@ -484,7 +486,8 @@ def add_isoelastics(plot_item, axis_x, axis_y, channel_width, pixel_size):
     # in Shape-Out 1.
     try:
         iso = isodef.get(
-            lut_identifier="LE-2D-FEM-19",
+            lut_identifier=lut_identifier if lut_identifier \
+                else "LE-2D-FEM-19",
             channel_width=channel_width,
             flow_rate=None,
             viscosity=None,
