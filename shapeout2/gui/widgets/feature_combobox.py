@@ -119,7 +119,7 @@ class FeatureComboBox(QtWidgets.QComboBox):
             model.appendRow(item)
 
         # If the previous selection exists in the new feature list, set it.
-        if not feat_cur and feat_cur in ds_feats:
+        if feat_cur and feat_cur in ds_feats:
             idx_cur = self.findData(feat_cur)
 
         # If no selection made by user, select the first available feature
