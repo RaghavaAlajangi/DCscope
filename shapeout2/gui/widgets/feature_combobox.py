@@ -118,17 +118,18 @@ class FeatureComboBox(QtWidgets.QComboBox):
             item.setToolTip(tip)
             model.appendRow(item)
 
-        if idx_cur < 0:  # no selection made by user
-            # Use the first available feature in `default_choices`
+        # If the previous selection exists in the new feature list, set it.
+        if not feat_cur and feat_cur in ds_feats:
+            idx_cur = self.findData(feat_cur)
+
+        # If no selection made by user, select the first available feature
+        # in `default_choices`
+        elif idx_cur < 0:
             for choice in self.default_choices:
                 idx_choice = self.findData(choice)
                 if idx_choice >= 0:
                     idx_cur = idx_choice
                     break
-        # If selection made by user and the selection exists in the new
-        # feature list, set it
-        if feat_cur in ds_feats:
-            idx_cur = self.findData(feat_cur)
 
         self.setCurrentIndex(idx_cur)
 
