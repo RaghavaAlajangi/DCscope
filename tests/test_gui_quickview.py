@@ -941,11 +941,11 @@ def test_select_x_y_axis_based_on_feature_name_issue_206(qtbot):
 
     # Set X-axis and Y-axis features in data slot 1
     qv.comboBox_x.setCurrentIndex(qv.comboBox_x.findData("area_um"))
-    qv.comboBox_y.setCurrentIndex(qv.comboBox_y.findData("deform"))
+    qv.comboBox_y.setCurrentIndex(qv.comboBox_y.findData("frame"))
 
     # Check if X-axis and Y-axis features are set correctly
     assert qv.comboBox_x.currentData() == "area_um", "Check manual selection"
-    assert qv.comboBox_y.currentData() == "deform", "Check manual selection"
+    assert qv.comboBox_y.currentData() == "frame", "Check manual selection"
 
     # Get the slot_id the second data slot
     slot_id2 = mw.pipeline.slot_ids[1]
@@ -955,4 +955,4 @@ def test_select_x_y_axis_based_on_feature_name_issue_206(qtbot):
 
     # Check if X-axis and Y-axis features are still set correctly
     assert qv.comboBox_x.currentData() == "area_um", "Check manual selection"
-    assert qv.comboBox_y.currentData() == "deform", "Check manual selection"
+    assert qv.comboBox_y.currentData() == "frame", "Check manual selection"
