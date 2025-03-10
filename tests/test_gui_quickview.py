@@ -900,3 +900,59 @@ def test_isoelasticity_lines_with_lut_selection(qtbot):
 
     # did that work?
     assert qv.comboBox_lut.currentData() == "HE-2D-FEM-22"
+
+
+def test_select_x_y_axis_based_on_feature_name_issue_206(qtbot):
+    """Test select X- axis and Y- axis based on feature name, not on list
+    index"""
+
+    mw = ShapeOut2()
+    qtbot.addWidget(mw)
+
+    # add dataslots
+    path1 = datapath / "calibration_beads_47.rtdc"
+    path2 = datapath / "blood_rbc_leukocytes.rtdc"
+    mw.add_dataslot(paths=[path1, path2])
+
+    assert len(mw.pipeline.slot_ids) == 2, "we added that"
+    assert len(mw.pipeline.filter_ids) == 1, "automatically added"
+
+    # Get the slot_id of the first data slot
+    slot_id1 = mw.pipeline.slot_ids[0]
+    filt_id = mw.pipeline.filter_ids[0]
+
+    # activate dataslot-1
+    em = mw.block_matrix.get_widget(slot_id1, filt_id)
+    qtbot.mouseClick(em, QtCore.Qt.MouseButton.LeftButton,
+                     QtCore.Qt.KeyboardModifier.ShiftModifier)
+
+    em = mw.block_matrix.get_widget(slot_id1, filt_id)
+    qtbot.mouseClick(em, QtCore.Qt.MouseButton.LeftButton)
+
+    # did that work?
+    assert mw.toolButton_quick_view.isChecked()
+
+    # Get QuickView instance
+    qv = mw.widget_quick_view
+
+    # Open plot (settings) tool of QuickView
+    plot_tool = qv.toolButton_settings
+    qtbot.mouseClick(plot_tool, QtCore.Qt.MouseButton.LeftButton)
+
+    # Set X-axis and Y-axis features in data slot 1
+    qv.comboBox_x.setCurrentIndex(qv.comboBox_x.findData("area_um"))
+    qv.comboBox_y.setCurrentIndex(qv.comboBox_y.findData("deform"))
+
+    # Check if X-axis and Y-axis features are set correctly
+    assert qv.comboBox_x.currentData() == "area_um", "Check manual selection"
+    assert qv.comboBox_y.currentData() == "deform", "Check manual selection"
+
+    # Get the slot_id the second data slot
+    slot_id2 = mw.pipeline.slot_ids[1]
+    # Activate data slot-2
+    em = mw.block_matrix.get_widget(slot_id2, filt_id)
+    qtbot.mouseClick(em, QtCore.Qt.MouseButton.LeftButton)
+
+    # Check if X-axis and Y-axis features are still set correctly
+    assert qv.comboBox_x.currentData() == "area_um", "Check manual selection"
+    assert qv.comboBox_y.currentData() == "deform", "Check manual selection"

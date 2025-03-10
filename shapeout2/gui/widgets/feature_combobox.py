@@ -100,6 +100,10 @@ class FeatureComboBox(QtWidgets.QComboBox):
         # based on self.default_choices in the end.
         idx_cur = self.currentIndex()
 
+        # Remember user selection. If it exists in ds_feats, the selection
+        # will persist even if the user switches the dataset.
+        feat_cur = self.currentData(self.data_role)
+
         blocked = self.signalsBlocked()  # remember block state
         self.blockSignals(True)
 
@@ -121,6 +125,11 @@ class FeatureComboBox(QtWidgets.QComboBox):
                 if idx_choice >= 0:
                     idx_cur = idx_choice
                     break
+        # If selection made by user and the selection exists in the new
+        # feature list, set it
+        if feat_cur in ds_feats:
+            idx_cur = self.findData(feat_cur)
+
         self.setCurrentIndex(idx_cur)
 
         # set previous selection

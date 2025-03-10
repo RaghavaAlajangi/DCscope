@@ -1,3 +1,5 @@
+2.21.6
+ - fix: persist feature selection in QuickView when switching data slots (#206)
 2.21.5
  - fix: disable table graphs widget when an image-type table is shown
  - fix: accessing table data from DCOR
