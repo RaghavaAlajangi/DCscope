@@ -2,14 +2,14 @@
 import pathlib
 import shutil
 
+import dclab
 import h5py
+import numpy as np
+import pytest
 from PyQt6 import QtCore, QtWidgets
 
-import dclab
-import numpy as np
-from shapeout2.gui.main import ShapeOut2
 from shapeout2 import session
-import pytest
+from shapeout2.gui.main import ShapeOut2
 
 datapath = pathlib.Path(__file__).parent / "data"
 
@@ -903,8 +903,10 @@ def test_isoelasticity_lines_with_lut_selection(qtbot):
 
 
 def test_select_x_y_axis_based_on_availiable_feature_name_issue_206(qtbot):
-    """Test select X- axis and Y- axis based on feature name that is
-    available in both datasets."""
+    """
+    Test select X-axis and Y-axis based on feature name that is available
+    in both datasets.
+    """
 
     mw = ShapeOut2()
     qtbot.addWidget(mw)
@@ -963,8 +965,10 @@ def test_select_x_y_axis_based_on_availiable_feature_name_issue_206(qtbot):
 
 
 def test_select_x_y_axis_based_on_unavailable_feature_name_issue_206(qtbot):
-    """Test select X- axis and Y- axis based on feature name that is not
-    available in both datasets."""
+    """
+    Test select X-axis and Y-axis based on feature name that is not available
+    in both datasets.
+    """
 
     mw = ShapeOut2()
     qtbot.addWidget(mw)

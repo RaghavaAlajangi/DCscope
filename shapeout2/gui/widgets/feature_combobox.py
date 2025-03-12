@@ -1,7 +1,6 @@
 import dclab
 from PyQt6 import QtCore, QtGui, QtWidgets
 
-
 #: These are features only visible in developer mode
 HIDDEN_FEATURES = []
 for ii in range(10):
@@ -121,7 +120,7 @@ class FeatureComboBox(QtWidgets.QComboBox):
         if feat_cur and feat_cur in ds_feats:
             # If the previous selection exists in the new feature list, set it.
             idx_cur = self.findData(feat_cur)
-        elif feat_cur not in ds_feats and idx_cur >= 0:
+        else:
             # If the previous selection does not exist in the new feature list,
             # select the first available feature in `default_choices`
             idx_cur = -1
