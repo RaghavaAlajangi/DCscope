@@ -3,6 +3,7 @@
  - fix: disable QuickView controls when there is no data to display
  - fix: IndexError when trying to show a deleted slot in QuickView (#214)
  - setup: bump dclab to 0.64.0 (refresh DCOR basins)
+ - ref: simplify contour data retrieval and caching in plot_cache.py
 2.22.0
  - feat: export image data as video (#202)
  - fix: persist feature selection in QuickView when switching data slots (#206)

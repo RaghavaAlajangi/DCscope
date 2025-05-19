@@ -5,7 +5,7 @@ from . import util
 
 
 def get_contour_data(rtdc_ds, xax, yax, xacc, yacc, xscale, yscale,
-                     kde_type="histogram", kde_kwargs=None, percentiles=None):
+                     kde_type="histogram", kde_kwargs=None, quantiles=None):
     if kde_kwargs is None:
         kde_kwargs = {}
     rtdc_ds.apply_filter()
@@ -22,7 +22,7 @@ def get_contour_data(rtdc_ds, xax, yax, xacc, yacc, xscale, yscale,
         # compute contour plot data
         kde_instance = KernelDensityEstimator(rtdc_ds=rtdc_ds)
         contours = kde_instance.get_contour_lines(
-            quantiles=percentiles,
+            quantiles=quantiles,
             xax=xax,
             yax=yax,
             xacc=xacc,

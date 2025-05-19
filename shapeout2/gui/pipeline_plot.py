@@ -609,7 +609,7 @@ def compute_contours(plot_state, rtdc_ds):
         xscale=gen["scale x"],
         yscale=gen["scale y"],
         kde_type=gen["kde"],
-        percentiles=[p/100 for p in con["percentiles"]]
+        quantiles=[p/100 for p in con["percentiles"]]
     )
     return contours
 
