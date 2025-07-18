@@ -118,6 +118,9 @@ class PipelinePlot(QtWidgets.QWidget):
         lay = plot_state["layout"]
         sca = plot_state["scatter"]
 
+        # get the dcnum hash map
+        hash_map_dict = dcnum_hash_map(dslist)
+
         # auto range (overrides stored ranges)
         if gen["auto range"]:
             # default range is limits + 5% margin
@@ -168,6 +171,11 @@ class PipelinePlot(QtWidgets.QWidget):
         elif lay["division"] == "each":
             colcount = 0
             for ds, sl in zip(dslist, slot_states):
+                # get the hash flag
+                pipe_config = ds.config.get("pipeline", {})
+                dcnum_hash = pipe_config.get("dcnum hash", None)
+                hash_flag = hash_map_dict.get(dcnum_hash, None)
+
                 pp = PipelinePlotItem(parent=linner)
                 self.plot_items.append(pp)
                 linner.addItem(item=pp,
@@ -175,7 +183,7 @@ class PipelinePlot(QtWidgets.QWidget):
                                col=None,
                                rowspan=1,
                                colspan=1)
-                pp.redraw([ds], [sl], plot_state)
+                pp.redraw([ds], [sl], plot_state, hash_flag)
                 colcount += 1
                 if colcount % lay["column count"] == 0:
                     linner.nextRow()
@@ -185,6 +193,11 @@ class PipelinePlot(QtWidgets.QWidget):
             plot_state_scatter = copy.deepcopy(plot_state)
             plot_state_scatter["contour"]["enabled"] = False
             for ds, sl in zip(dslist, slot_states):
+                # get the hash flag
+                pipe_config = ds.config.get("pipeline", {})
+                dcnum_hash = pipe_config.get("dcnum hash", None)
+                hash_flag = hash_map_dict.get(dcnum_hash, None)
+
                 pp = PipelinePlotItem(parent=linner)
                 self.plot_items.append(pp)
                 linner.addItem(item=pp,
@@ -192,7 +205,7 @@ class PipelinePlot(QtWidgets.QWidget):
                                col=None,
                                rowspan=1,
                                colspan=1)
-                pp.redraw([ds], [sl], plot_state_scatter)
+                pp.redraw([ds], [sl], plot_state_scatter, hash_flag)
                 colcount += 1
                 if colcount % lay["column count"] == 0:
                     linner.nextRow()
@@ -294,7 +307,7 @@ class PipelinePlotItem(SimplePlotItem):
             exp = exporters.SVGExporter(win.scene())
         exp.export(file)
 
-    def redraw(self, dslist, slot_states, plot_state):
+    def redraw(self, dslist, slot_states, plot_state, hash_flag=None):
         # Remove everything
         for el in self._plot_elements:
             self.removeItem(el)
@@ -333,7 +346,8 @@ class PipelinePlotItem(SimplePlotItem):
                 sct = add_scatter(plot_item=self,
                                   rtdc_ds=rtdc_ds,
                                   plot_state=plot_state,
-                                  slot_state=ss
+                                  slot_state=ss,
+                                  hash_flag=hash_flag
                                   )
                 self._plot_elements += sct
         # Contour data
@@ -525,7 +539,7 @@ def add_isoelastics(plot_item, axis_x, axis_y, channel_width, pixel_size,
     return elements
 
 
-def add_scatter(plot_item, plot_state, rtdc_ds, slot_state):
+def add_scatter(plot_item, plot_state, rtdc_ds, slot_state, hash_flag):
     gen = plot_state["general"]
     sca = plot_state["scatter"]
     scatter = pg.ScatterPlotItem(size=sca["marker size"],
@@ -591,6 +605,17 @@ def add_scatter(plot_item, plot_state, rtdc_ds, slot_state):
         x = np.log10(x)
     if gen["scale y"] == "log":
         y = np.log10(y)
+
+    # add dcnum hash label
+    if hash_flag:
+        add_label(
+            hash_flag,
+            anchor_parent=plot_item.axes["top"]["item"],
+            font_size_diff=-1,
+            color="red",
+            text_halign="left",
+            text_valign="top",
+        )
 
     scatter.setData(x=x, y=y, brush=brush)
     scatter.setZValue(-50)
@@ -731,6 +756,35 @@ def set_viewbox(plot, range_x, range_y, scale_x="linear", scale_y="linear",
                   yRange=range_y,
                   padding=padding,
                   )
+
+
+def dcnum_hash_map(dslist):
+    hash_count_dict = {}
+    for ds in dslist:
+        hash = ds.config.get("pipeline", {}).get("dcnum hash", None)
+        if hash and hash not in hash_count_dict:
+            hash_count_dict[hash] = 1
+        elif hash:
+            hash_count_dict[hash] += 1
+        else:
+            pass
+
+    sorted_hashes = sorted(hash_count_dict.items(), key=lambda item: item[1],
+                           reverse=True)
+    transformed_dict = {}
+    type_char_code = ord("A")
+
+    # Apply the transformation logic
+    for i, (element, hash) in enumerate(sorted_hashes):
+        if i == 0:
+            # The first element (highest hash count) becomes None
+            transformed_dict[element] = None
+        else:
+            # Subsequent elements get "Type A", "Type B", etc.
+            transformed_dict[element] = f"Type {chr(type_char_code)}"
+            type_char_code += 1
+
+    return transformed_dict
 
 
 linestyles = {
