@@ -769,20 +769,22 @@ def dcnum_hash_map(dslist):
         else:
             pass
 
-    sorted_hashes = sorted(hash_count_dict.items(), key=lambda item: item[1],
-                           reverse=True)
+    sorted_hashes = sorted(
+        hash_count_dict.items(), key=lambda item: item[1], reverse=True
+    )
     transformed_dict = {}
-    type_char_code = ord("A")
+    type_char = ord("A")
 
     # Apply the transformation logic
     for i, (element, hash) in enumerate(sorted_hashes):
-        if i == 0:
-            # The first element (highest hash count) becomes None
+        if len(sorted_hashes) == 1:
+            # If there is only one element, it becomes None
             transformed_dict[element] = None
+            continue
         else:
-            # Subsequent elements get "Type A", "Type B", etc.
-            transformed_dict[element] = f"Type {chr(type_char_code)}"
-            type_char_code += 1
+            # Subsequent elements get "Pipeline type A", "Pipeline type B",..
+            transformed_dict[element] = f"Pipeline type: {chr(type_char)}"
+            type_char += 1
 
     return transformed_dict
 
