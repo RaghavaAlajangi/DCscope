@@ -118,8 +118,15 @@ class PipelinePlot(QtWidgets.QWidget):
         lay = plot_state["layout"]
         sca = plot_state["scatter"]
 
-        # get the dcnum hash map
-        hash_map_dict = dcnum_hash_map(dslist)
+        # create a hash set for the dcnum hashes
+        hash_set = set()
+        for ds in dslist:
+            pipe_config = ds.config.get("pipeline", {})
+            dcnum_hash = pipe_config.get("dcnum hash", None)
+            if dcnum_hash is not None:
+                hash_set.add(dcnum_hash)
+            else:
+                hash_set.add(None)
 
         # auto range (overrides stored ranges)
         if gen["auto range"]:
@@ -172,9 +179,7 @@ class PipelinePlot(QtWidgets.QWidget):
             colcount = 0
             for ds, sl in zip(dslist, slot_states):
                 # get the hash flag
-                pipe_config = ds.config.get("pipeline", {})
-                dcnum_hash = pipe_config.get("dcnum hash", None)
-                hash_flag = hash_map_dict.get(dcnum_hash, None)
+                hash_flag = get_hash_flag(hash_set, ds)
 
                 pp = PipelinePlotItem(parent=linner)
                 self.plot_items.append(pp)
@@ -194,9 +199,7 @@ class PipelinePlot(QtWidgets.QWidget):
             plot_state_scatter["contour"]["enabled"] = False
             for ds, sl in zip(dslist, slot_states):
                 # get the hash flag
-                pipe_config = ds.config.get("pipeline", {})
-                dcnum_hash = pipe_config.get("dcnum hash", None)
-                hash_flag = hash_map_dict.get(dcnum_hash, None)
+                hash_flag = get_hash_flag(hash_set, ds)
 
                 pp = PipelinePlotItem(parent=linner)
                 self.plot_items.append(pp)
@@ -758,35 +761,25 @@ def set_viewbox(plot, range_x, range_y, scale_x="linear", scale_y="linear",
                   )
 
 
-def dcnum_hash_map(dslist):
-    hash_count_dict = {}
-    for ds in dslist:
-        hash = ds.config.get("pipeline", {}).get("dcnum hash", None)
-        if hash and hash not in hash_count_dict:
-            hash_count_dict[hash] = 1
-        elif hash:
-            hash_count_dict[hash] += 1
-        else:
-            pass
+def get_hash_flag(hash_set, rtdc_ds):
+    """Helper function to determine the hash flag based on the dataset and
+    hash set."""
+    req_hash_len = 4
+    short_hash_set = set(h[:req_hash_len] for h in hash_set if h is not None)
 
-    sorted_hashes = sorted(
-        hash_count_dict.items(), key=lambda item: item[1], reverse=True
-    )
-    transformed_dict = {}
-    type_char = ord("A")
+    if len(short_hash_set) != len(hash_set):
+        req_hash_len = 5
 
-    # Apply the transformation logic
-    for i, (element, hash) in enumerate(sorted_hashes):
-        if len(sorted_hashes) == 1:
-            # If there is only one element, it becomes None
-            transformed_dict[element] = None
-            continue
-        else:
-            # Subsequent elements get "Pipeline type A", "Pipeline type B",..
-            transformed_dict[element] = f"Pipeline type: {chr(type_char)}"
-            type_char += 1
-
-    return transformed_dict
+    if len(hash_set) == 1:
+        # only one hash, no need to show it
+        return None
+    else:
+        # get the pipeline hash
+        pipe_config = rtdc_ds.config.get("pipeline", {})
+        dcnum_hash = pipe_config.get("dcnum hash", None)
+        # use the first `req_hash_len` characters of the hash
+        short_hash = dcnum_hash[:req_hash_len] if dcnum_hash else None
+        return f"Pipeline: {short_hash}"
 
 
 linestyles = {
