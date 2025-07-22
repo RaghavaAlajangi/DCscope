@@ -1,6 +1,11 @@
 import numpy as np
+import pathlib
+
+import dclab
 
 from shapeout2.gui import pipeline_plot
+
+datapath = pathlib.Path(__file__).parent / "data"
 
 
 def test_compute_contour_opening_angles():
@@ -71,3 +76,26 @@ def test_compute_contour_opening_angles_log_scale():
     angles = pipeline_plot.compute_contour_opening_angles(
         plot_state=plot_state, contour=contour)
     assert np.allclose(angles, np.pi/3)
+
+
+def test_get_hash_flag():
+    rtdc_paths = datapath.glob("*.rtdc")
+
+    hash_set = set()
+    rtdc_ds_list = []
+    expected = []
+    for path in rtdc_paths:
+        ds = dclab.new_dataset(path)
+        # get the hash flag
+        pipe_config = ds.config.get("pipeline", {})
+        dcnum_hash = pipe_config.get("dcnum hash", None)
+        hash_set.add(dcnum_hash)
+        expected.append(f"Pipeline: {dcnum_hash[:4]}" if dcnum_hash else None)
+        rtdc_ds_list.append(ds)
+
+    assert len(hash_set) == 2
+
+    for ds, exp in zip(rtdc_ds_list, expected):
+        result = pipeline_plot.get_hash_flag(hash_set, ds)
+        print(result)
+        assert result == exp
