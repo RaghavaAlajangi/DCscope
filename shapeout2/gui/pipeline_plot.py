@@ -764,9 +764,9 @@ def set_viewbox(plot, range_x, range_y, scale_x="linear", scale_y="linear",
 def get_hash_flag(hash_set, rtdc_ds):
     """Helper function to determine the hash flag based on the dataset and
     hash set."""
-    req_hash_len = 4
-    short_hash_set = set(h[:req_hash_len] for h in hash_set if h is not None)
+    short_hash_set = set(h[:4] if h is not None else None for h in hash_set)
 
+    req_hash_len = 4
     if len(short_hash_set) != len(hash_set):
         req_hash_len = 5
 
@@ -779,7 +779,7 @@ def get_hash_flag(hash_set, rtdc_ds):
         dcnum_hash = pipe_config.get("dcnum hash", None)
         # use the first `req_hash_len` characters of the hash
         short_hash = dcnum_hash[:req_hash_len] if dcnum_hash else None
-        return f"Pipeline: {short_hash}"
+        return f"Pipeline: {short_hash}" if short_hash else None
 
 
 linestyles = {
