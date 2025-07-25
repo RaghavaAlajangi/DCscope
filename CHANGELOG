@@ -1,4 +1,5 @@
 2.22.1
+ - feat: notify user when loaded data have different pipeline hashes (#217)
  - fix: prevent accidental polygon filter creation (#148)
  - fix: disable QuickView controls when there is no data to display
  - fix: IndexError when trying to show a deleted slot in QuickView (#214)
