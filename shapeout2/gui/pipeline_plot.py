@@ -764,11 +764,19 @@ def set_viewbox(plot, range_x, range_y, scale_x="linear", scale_y="linear",
 def get_hash_flag(hash_set, rtdc_ds):
     """Helper function to determine the hash flag based on the dataset and
     hash set."""
-    short_hash_set = set(h[:4] if h is not None else None for h in hash_set)
-
     req_hash_len = 4
-    if len(short_hash_set) != len(hash_set):
-        req_hash_len = 5
+    # get the valid hash from the hash set
+    valid_hash = next(hash for hash in hash_set if hash)
+
+    # find the minimum length of hash iteratively
+    for char_len in range(req_hash_len, len(valid_hash)):
+        temp_short_hash_set = set(
+            h[:char_len] if h is not None else None for h in hash_set
+            )
+        if len(temp_short_hash_set) != len(hash_set):
+            req_hash_len += 1
+        else:
+            break
 
     if len(hash_set) == 1:
         # only one hash, no need to show it
