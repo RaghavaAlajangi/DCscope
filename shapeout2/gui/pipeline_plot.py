@@ -764,11 +764,15 @@ def set_viewbox(plot, range_x, range_y, scale_x="linear", scale_y="linear",
 def get_hash_flag(hash_set, rtdc_ds):
     """Helper function to determine the hash flag based on the dataset and
     hash set."""
+    if len(hash_set) == 1:
+        # only one hash, no need to show it
+        return None
+
     req_hash_len = 4
     # get the valid hash from the hash set
     valid_hash = next(hash for hash in hash_set if hash)
 
-    # find the minimum length of hash iteratively
+    # find the minimum and unique hash length dynamically
     for char_len in range(req_hash_len, len(valid_hash)):
         temp_short_hash_set = set(
             h[:char_len] if h is not None else None for h in hash_set
@@ -778,16 +782,12 @@ def get_hash_flag(hash_set, rtdc_ds):
         else:
             break
 
-    if len(hash_set) == 1:
-        # only one hash, no need to show it
-        return None
-    else:
-        # get the pipeline hash
-        pipe_config = rtdc_ds.config.get("pipeline", {})
-        dcnum_hash = pipe_config.get("dcnum hash", None)
-        # use the first `req_hash_len` characters of the hash
-        short_hash = dcnum_hash[:req_hash_len] if dcnum_hash else None
-        return f"Pipeline: {short_hash}" if short_hash else None
+    # get the pipeline hash
+    pipe_config = rtdc_ds.config.get("pipeline", {})
+    dcnum_hash = pipe_config.get("dcnum hash", None)
+    # use the first `req_hash_len` characters of the hash
+    short_hash = dcnum_hash[:req_hash_len] if dcnum_hash else None
+    return f"Pipeline: {short_hash}" if short_hash else None
 
 
 linestyles = {
