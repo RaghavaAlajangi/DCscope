@@ -769,11 +769,11 @@ def get_hash_flag(hash_set, rtdc_ds):
         return None
 
     req_hash_len = 4
-    # get the valid hash from the hash set
-    valid_hash = next(hash for hash in hash_set if hash)
+    # get the longest hash from the hash set
+    longest_hash = max((h for h in hash_set if h), key=len, default="temphash")
 
     # find the minimum and unique hash length dynamically
-    for char_len in range(req_hash_len, len(valid_hash)):
+    for char_len in range(req_hash_len, len(longest_hash)):
         temp_short_hash_set = set(
             h[:char_len] if h is not None else None for h in hash_set
             )
