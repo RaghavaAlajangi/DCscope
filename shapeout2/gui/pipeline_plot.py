@@ -118,16 +118,6 @@ class PipelinePlot(QtWidgets.QWidget):
         lay = plot_state["layout"]
         sca = plot_state["scatter"]
 
-        # create a hash set for the dcnum hashes
-        hash_set = set()
-        for ds in dslist:
-            pipe_config = ds.config.get("pipeline", {})
-            dcnum_hash = pipe_config.get("dcnum hash", None)
-            if dcnum_hash is not None:
-                hash_set.add(dcnum_hash)
-            else:
-                hash_set.add(None)
-
         # auto range (overrides stored ranges)
         if gen["auto range"]:
             # default range is limits + 5% margin
@@ -178,9 +168,6 @@ class PipelinePlot(QtWidgets.QWidget):
         elif lay["division"] == "each":
             colcount = 0
             for ds, sl in zip(dslist, slot_states):
-                # get the hash flag
-                hash_flag = get_hash_flag(hash_set, ds)
-
                 pp = PipelinePlotItem(parent=linner)
                 self.plot_items.append(pp)
                 linner.addItem(item=pp,
@@ -188,7 +175,7 @@ class PipelinePlot(QtWidgets.QWidget):
                                col=None,
                                rowspan=1,
                                colspan=1)
-                pp.redraw([ds], [sl], plot_state, hash_flag)
+                pp.redraw([ds], [sl], plot_state)
                 colcount += 1
                 if colcount % lay["column count"] == 0:
                     linner.nextRow()
@@ -198,9 +185,6 @@ class PipelinePlot(QtWidgets.QWidget):
             plot_state_scatter = copy.deepcopy(plot_state)
             plot_state_scatter["contour"]["enabled"] = False
             for ds, sl in zip(dslist, slot_states):
-                # get the hash flag
-                hash_flag = get_hash_flag(hash_set, ds)
-
                 pp = PipelinePlotItem(parent=linner)
                 self.plot_items.append(pp)
                 linner.addItem(item=pp,
@@ -208,7 +192,7 @@ class PipelinePlot(QtWidgets.QWidget):
                                col=None,
                                rowspan=1,
                                colspan=1)
-                pp.redraw([ds], [sl], plot_state_scatter, hash_flag)
+                pp.redraw([ds], [sl], plot_state_scatter)
                 colcount += 1
                 if colcount % lay["column count"] == 0:
                     linner.nextRow()
@@ -310,7 +294,7 @@ class PipelinePlotItem(SimplePlotItem):
             exp = exporters.SVGExporter(win.scene())
         exp.export(file)
 
-    def redraw(self, dslist, slot_states, plot_state, hash_flag=None):
+    def redraw(self, dslist, slot_states, plot_state):
         # Remove everything
         for el in self._plot_elements:
             self.removeItem(el)
@@ -349,8 +333,7 @@ class PipelinePlotItem(SimplePlotItem):
                 sct = add_scatter(plot_item=self,
                                   rtdc_ds=rtdc_ds,
                                   plot_state=plot_state,
-                                  slot_state=ss,
-                                  hash_flag=hash_flag
+                                  slot_state=ss
                                   )
                 self._plot_elements += sct
         # Contour data
@@ -542,7 +525,7 @@ def add_isoelastics(plot_item, axis_x, axis_y, channel_width, pixel_size,
     return elements
 
 
-def add_scatter(plot_item, plot_state, rtdc_ds, slot_state, hash_flag):
+def add_scatter(plot_item, plot_state, rtdc_ds, slot_state):
     gen = plot_state["general"]
     sca = plot_state["scatter"]
     scatter = pg.ScatterPlotItem(size=sca["marker size"],
@@ -608,17 +591,6 @@ def add_scatter(plot_item, plot_state, rtdc_ds, slot_state, hash_flag):
         x = np.log10(x)
     if gen["scale y"] == "log":
         y = np.log10(y)
-
-    # add dcnum hash label
-    if hash_flag:
-        add_label(
-            hash_flag,
-            anchor_parent=plot_item.axes["top"]["item"],
-            font_size_diff=-1,
-            color="red",
-            text_halign="left",
-            text_valign="top",
-        )
 
     scatter.setData(x=x, y=y, brush=brush)
     scatter.setZValue(-50)
@@ -759,35 +731,6 @@ def set_viewbox(plot, range_x, range_y, scale_x="linear", scale_y="linear",
                   yRange=range_y,
                   padding=padding,
                   )
-
-
-def get_hash_flag(hash_set, rtdc_ds):
-    """Helper function to determine the hash flag based on the dataset and
-    hash set."""
-    if len(hash_set) == 1:
-        # only one hash, no need to show it
-        return None
-
-    req_hash_len = 4
-    # get the longest hash from the hash set
-    longest_hash = max((h for h in hash_set if h), key=len, default="temphash")
-
-    # find the minimum and unique hash length dynamically
-    for char_len in range(req_hash_len, len(longest_hash)):
-        temp_short_hash_set = set(
-            h[:char_len] if h is not None else None for h in hash_set
-            )
-        if len(temp_short_hash_set) != len(hash_set):
-            req_hash_len += 1
-        else:
-            break
-
-    # get the pipeline hash
-    pipe_config = rtdc_ds.config.get("pipeline", {})
-    dcnum_hash = pipe_config.get("dcnum hash", None)
-    # use the first `req_hash_len` characters of the hash
-    short_hash = dcnum_hash[:req_hash_len] if dcnum_hash else None
-    return f"Pipeline: {short_hash}" if short_hash else None
 
 
 linestyles = {
