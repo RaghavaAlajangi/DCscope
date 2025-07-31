@@ -7,8 +7,8 @@ import h5py
 import numpy as np
 from PyQt6 import QtCore
 import pytest
-from shapeout2.gui.main import ShapeOut2
-from shapeout2 import pipeline, session
+from dcscope.gui.main import DCscope
+from dcscope import pipeline, session
 
 
 datapath = pathlib.Path(__file__).parent / "data"
@@ -29,7 +29,7 @@ def test_empty_plot_with_one_plot_per_dataset_issue_41(qtbot):
     Setting "one plot per dataset" for an empty plot resulted in
     zero-division error when determining col/row numbers
     """
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot
@@ -63,7 +63,7 @@ def test_feature_bright_avg_not_present_issue_62(qtbot):
     with dclab.new_dataset(datapath / "calibration_beads_47.rtdc") as ds:
         ds.export.hdf5(tmp, features=["area_um", "pos_x", "pos_y", "deform"])
 
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
     # add dataset
     slot_id = mw.add_dataslot([tmp])[0]
@@ -77,7 +77,7 @@ def test_feature_bright_avg_not_present_issue_62(qtbot):
 
 def test_handle_axis_selection_empty_plot(qtbot):
     """User did not add a dataset to a plot and starts changing plot params"""
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot
@@ -100,10 +100,10 @@ def test_handle_axis_selection_empty_plot(qtbot):
 
     # This lead to:
     #    Traceback (most recent call last):
-    #  File "/ShapeOut2/shapeout2/gui/analysis/ana_plot.py",
+    #  File "/DCscope/dcscope/gui/analysis/ana_plot.py",
     #     line 406, in on_axis_changed
     #    self._set_contour_spacing_auto(axis_y=gen["axis y"])
-    #  File "/ShapeOut2/shapeout2/gui/analysis/ana_plot.py",
+    #  File "/DCscope/dcscope/gui/analysis/ana_plot.py",
     #     line 361, in _set_contour_spacing_auto
     #    spacings_xy.append(np.min(spacings))
     #  File "/numpy/core/fromnumeric.py", line 2618, in amin
@@ -118,9 +118,9 @@ def test_handle_axis_selection_empty_plot(qtbot):
 def test_handle_empty_plots_issue_27(qtbot):
     """Correctly handle empty plots
 
-    https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/issues/27
+    https://github.com/DC-analysis/DCscope/issues/27
     """
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot
@@ -177,7 +177,7 @@ def test_handle_nan_valued_feature_color(qtbot):
     """User wants to color scatter data points with feature containing nans"""
     spath = datapath / "version_2_1_2_plot_color_emodulus.so2"
 
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # lead to:
@@ -192,7 +192,7 @@ def test_hue_feature_not_computed_if_not_selected(qtbot):
     with dclab.new_dataset(datapath / "calibration_beads_47.rtdc") as ds:
         ds.export.hdf5(tmp, features=["area_um", "pos_x", "pos_y", "image",
                                       "mask", "deform"])
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
     # add dataset
     slot_id = mw.add_dataslot([tmp])[0]
@@ -221,7 +221,7 @@ def test_plot_ml_score(qtbot):
     with h5py.File(tmp, "a") as h5:
         h5["/events/ml_score_ds9"] = np.linspace(0, 1, lends)
         h5["/events/ml_score_voy"] = np.linspace(1, 0, lends)
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
     # add dataset
     slot_id = mw.add_dataslot([tmp])[0]
@@ -253,15 +253,15 @@ def test_plot_ml_score(qtbot):
 def test_remove_plots_issue_36(qtbot):
     """Correctly handle empty plots
 
-    https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/issues/36
+    https://github.com/DC-analysis/DCscope/issues/36
 
     Traceback (most recent call last):
-      File "/home/paul/repos/ShapeOut2/shapeout2/gui/main.py",
+      File "/home/paul/repos/DCscope/dcscope/gui/main.py",
         line 193, in adopt_pipeline
         lay = pipeline_state["plots"][plot_index]["layout"]
     IndexError: list index out of range
     """
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslots
@@ -283,7 +283,7 @@ def test_remove_plots_issue_36(qtbot):
 
 def test_changing_lut_identifier_in_analysis_view_plots(qtbot):
     """Test LUT identifier user interaction in analysis view plots."""
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot

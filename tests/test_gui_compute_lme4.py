@@ -3,9 +3,9 @@ import pathlib
 import socket
 
 from dclab.lme4 import rsetup
-from shapeout2.gui.main import ShapeOut2
-from shapeout2 import session
-from shapeout2.gui.compute.comp_lme4 import ComputeSignificance
+from dcscope.gui.main import DCscope
+from dcscope import session
+from dcscope.gui.compute.comp_lme4 import ComputeSignificance
 import pytest
 
 
@@ -41,7 +41,7 @@ def test_lme4_with_dcor_session(qtbot):
     dclab docs at
     https://dclab.readthedocs.io/en/stable/sec_av_lme4.html
     """
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
     mw.on_action_open(data_path / "version_2_5_0_dcor_lme4.so2")
 
@@ -80,7 +80,7 @@ def test_lme4_with_dcor_session_differential(qtbot):
     """
     Perform differential deformation test
     """
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
     mw.on_action_open(data_path / "version_2_5_0_dcor_lme4_diff.so2")
 

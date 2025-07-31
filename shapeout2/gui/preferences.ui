@@ -161,7 +161,7 @@
           </size>
          </property>
          <property name="text">
-          <string>If you are working with DC datasets that have basins in an S3 object store, you can specify the corresponding access credentials here. Please restart Shape-Out for the settings to take effect.</string>
+          <string>If you are working with DC datasets that have basins in an S3 object store, you can specify the corresponding access credentials here. Please restart DCscope for the settings to take effect.</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>

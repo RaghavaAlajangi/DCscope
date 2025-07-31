@@ -82,7 +82,7 @@ class FilterRay(object):
 
         This is a convenience function used when the filter ray
         must be applied to a different dataset (not the one in
-        `self.slot`). This is used in Shape-Out when a filter ray
+        `self.slot`). This is used in DCscope when a filter ray
         is applied to other data on disk e.g. when computing
         statistics. For regular use of the filter ray in a
         pipeline, use :func:`get_dataset`.

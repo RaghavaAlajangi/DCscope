@@ -4,7 +4,7 @@ RT-DC Basics
 This section conveys the basic understanding necessary for analyzing and
 interpreting RT-DC data. If you have the feeling that something is not
 covered here, please create an
-`issue on GitHub <https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/issues/new>`__.
+`issue on GitHub <https://github.com/DC-analysis/DCscope/issues/new>`__.
 
 Working Principle
 =================
@@ -36,14 +36,14 @@ A multitude of features can be extracted from the data recorded during an
 RT-DC measurement. These features are mostly computed live during data
 acquisition and are stored alongside the raw image data.
 Here, only the most important features are discussed. A full list of the
-features available in Shape-Out is maintained in the
+features available in DCscope is maintained in the
 :ref:`dclab documentation <dclab:sec_features>`.
 
 
 Area and porosity
 -----------------
 The area is the projected object area which is determined via the contour of the
-binarized event image. Shape-Out differentiates between two types of area,
+binarized event image. DCscope differentiates between two types of area,
 area of the measured contour ("Measured area [px]") and area of the convex
 contour ("Convex area [px]" and "Area [µm²]"). The convex contour is the
 `convex hull <https://en.wikipedia.org/wiki/Convex_hull>`__ of the measured
@@ -102,7 +102,7 @@ in a drop of blood :cite:`Toepfner2018`.
    Figure and caption adapted from Toepfner et al. [1]_.
 
 In addition to the average
-brightness values, Shape-Out also has access to the standard deviation of the
+brightness values, DCscope also has access to the standard deviation of the
 brightness in each image.
 
 
@@ -132,7 +132,7 @@ employed to visualize stiffness.
    trends in stiffness.
 
 Note that it is also possible to directly
-:ref:`access the Young's modulus in Shape-Out <sec_qg_youngs_modulus>`.
+:ref:`access the Young's modulus in DCscope <sec_qg_youngs_modulus>`.
 
 
 Fluorescence
@@ -165,12 +165,12 @@ of deformation. In contrast to deformation (which is computed from the
 contour), inertia ratio is based on the integral over the cell area and thus
 less prone to noise. In comparison to deformation, the inertia ratio has a low
 correlation to porosity.
-Shape-Out also allows to compute the principal inertia ratio which is the
+DCscope also allows to compute the principal inertia ratio which is the
 maximal inertia ratio that can be obtained by rotating the contour. Thus,
 the principal inertia ratio is rotation-invariant which makes it applicable
 to reservoir measurements where e.g. cells are not aligned with the channel.
 To quantify the alignment of the measured objects with the measurement
-channel, Shape-Out can additionally quantify the tilt of the contour
+channel, DCscope can additionally quantify the tilt of the contour
 relative to the channel axis.
 
 .. figure:: figures/inert_ratio.jpg
@@ -186,7 +186,7 @@ relative to the channel axis.
 
 Volume
 ------
-Shape-Out can compute the volume from the event contour under the assumption
+DCscope can compute the volume from the event contour under the assumption
 of rotational symmetry, i.e. it is assumed that the projection of the cell
 volume onto the detector plane does not change when the cell is rotated,
 with a rotational axis parallel to the flow direction.

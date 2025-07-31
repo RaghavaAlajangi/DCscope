@@ -2,8 +2,8 @@ import pathlib
 
 from PyQt6 import QtCore
 
-from shapeout2.gui.main import ShapeOut2
-from shapeout2 import session
+from dcscope.gui.main import DCscope
+from dcscope import session
 import pytest
 
 
@@ -21,7 +21,7 @@ def run_around_tests():
 
 
 def test_matrix_slots(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot
@@ -50,7 +50,7 @@ def test_matrix_slots(qtbot):
 
 
 def test_matrix_filter_duplicate_issue_184(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot
@@ -75,7 +75,7 @@ def test_matrix_filter_duplicate_issue_184(qtbot):
 
 
 def test_matrix_slots_duplicate_issue_96(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot

@@ -7,8 +7,8 @@ from PyQt6 import QtCore, QtWidgets
 import dclab
 import h5py
 import numpy as np
-from shapeout2.gui.main import ShapeOut2
-from shapeout2 import session
+from dcscope.gui.main import DCscope
+from dcscope import session
 import pytest
 
 datapath = pathlib.Path(__file__).parent / "data"
@@ -44,7 +44,7 @@ def run_around_tests():
 
 def test_allow_to_set_manual_temperature_for_known_medium(qtbot):
     """Fixes regression introduced in 2.4.0"""
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
     # add fake measurement
     path1 = make_dataset(medium=None, temp=23.5)
@@ -74,7 +74,7 @@ def test_allow_to_set_manual_temperature_for_known_medium(qtbot):
 
 
 def test_empty_medium_string_should_offer_user_edit(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
     # add fake measurement
     path1 = make_dataset(medium=" ")
@@ -94,7 +94,7 @@ def test_empty_medium_string_should_offer_user_edit(qtbot):
 
 
 def test_other_medium_viscosity_editable_issue_49(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
     # add fake measurement
     path1 = make_dataset(medium=None)
@@ -113,7 +113,7 @@ def test_other_medium_viscosity_editable_issue_49(qtbot):
 @pytest.mark.filterwarnings(
     'ignore::dclab.features.emodulus.YoungsModulusLookupTableExceededWarning')
 def test_simple(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add fake measurement
@@ -174,7 +174,7 @@ def test_simple(qtbot):
 
 
 def test_switch_and_update_chip_region(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add fake measurement
@@ -226,7 +226,7 @@ def test_switch_and_update_chip_region(qtbot):
 
 
 def test_switch_and_update_medium(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add fake measurement
@@ -276,7 +276,7 @@ def test_switch_and_update_medium(qtbot):
 
 
 def test_user_defined_medium_should_work(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
     # add fake measurement
     path1 = make_dataset(medium="MyMedium")
@@ -299,7 +299,7 @@ def test_user_defined_medium_should_work(qtbot):
 
 
 def test_changeable_lut_selection(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add fake measurement
@@ -357,7 +357,7 @@ def test_changeable_lut_selection(qtbot):
 
 
 def test_viscosity_defaults_to_buyukurganci_2022(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add fake measurement

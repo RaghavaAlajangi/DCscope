@@ -12,7 +12,7 @@ from ...util import get_valid_filename
 class ExportFilter(QtWidgets.QDialog):
     def __init__(self, parent, pipeline, file_format, *args, **kwargs):
         super(ExportFilter, self).__init__(parent=parent, *args, **kwargs)
-        ref = importlib.resources.files("shapeout2.gui.export") / "e2filter.ui"
+        ref = importlib.resources.files("dcscope.gui.export") / "e2filter.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 
@@ -45,7 +45,7 @@ class ExportFilter(QtWidgets.QDialog):
                     path += ".poly"
                 dclab.PolygonFilter.save_all(path)
             else:
-                cap = "Shape-Out 2 filter files (*.sof)"
+                cap = "DCscope filter files (*.sof)"
                 path, _ = QtWidgets.QFileDialog.getSaveFileName(
                     self, 'Save polygon filters', '', cap)
                 if not path.endswith(".sof"):

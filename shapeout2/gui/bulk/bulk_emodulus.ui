@@ -204,7 +204,7 @@
   <customwidget>
    <class>DoubleSpinBoxNan</class>
    <extends>QDoubleSpinBox</extends>
-   <header>shapeout2.gui.widgets</header>
+   <header>dcscope.gui.widgets</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -8,8 +8,8 @@ import numpy as np
 
 from PyQt6 import uic, QtCore, QtWidgets
 
-from shapeout2.gui.analysis.ana_slot import SlotPanel
-from shapeout2.gui.widgets import show_wait_cursor
+from dcscope.gui.analysis.ana_slot import SlotPanel
+from dcscope.gui.widgets import show_wait_cursor
 
 
 class BulkActionEmodulus(QtWidgets.QDialog):
@@ -20,7 +20,7 @@ class BulkActionEmodulus(QtWidgets.QDialog):
         super(BulkActionEmodulus, self).__init__(parent=parent,
                                                  *args, **kwargs)
         ref = importlib.resources.files(
-            "shapeout2.gui.bulk") / "bulk_emodulus.ui"
+            "dcscope.gui.bulk") / "bulk_emodulus.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 

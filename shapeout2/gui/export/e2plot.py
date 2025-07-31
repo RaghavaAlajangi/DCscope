@@ -19,7 +19,7 @@ EXPORTERS = {
 class ExportPlot(QtWidgets.QDialog):
     def __init__(self, parent, pipeline, *args, **kwargs):
         super(ExportPlot, self).__init__(parent=parent, *args, **kwargs)
-        ref = importlib.resources.files("shapeout2.gui.export") / "e2plot.ui"
+        ref = importlib.resources.files("dcscope.gui.export") / "e2plot.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 

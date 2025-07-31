@@ -8,8 +8,8 @@ import numpy as np
 import pytest
 from PyQt6 import QtCore, QtWidgets
 
-from shapeout2 import session
-from shapeout2.gui.main import ShapeOut2
+from dcscope import session
+from dcscope.gui.main import DCscope
 
 datapath = pathlib.Path(__file__).parent / "data"
 
@@ -26,13 +26,13 @@ def run_around_tests():
 
 def test_simple(qtbot):
     """Open the main window and close it again"""
-    main_window = ShapeOut2()
+    main_window = DCscope()
     main_window.close()
 
 
 def test_clear_session_issue_25(qtbot):
-    """https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/issues/25"""
-    mw = ShapeOut2()
+    """https://github.com/DC-analysis/DCscope/issues/25"""
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot
@@ -56,11 +56,11 @@ def test_clear_session_issue_25(qtbot):
 
 
 def test_duplicate_polygon_filter_issue_148(qtbot):
-    """https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/issues/148
+    """https://github.com/DC-analysis/DCscope/issues/148
 
     A duplicate polygon filter was created (that could not be deleted).
     """
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot
@@ -146,11 +146,11 @@ def test_duplicate_polygon_filter_issue_148(qtbot):
 
 
 @pytest.mark.filterwarnings('ignore::RuntimeWarning')  # 0-div in kde-methods
-@pytest.mark.filterwarnings('ignore::shapeout2.pipeline.core.'
+@pytest.mark.filterwarnings('ignore::dcscope.pipeline.core.'
                             + 'EmptyDatasetWarning')
 def test_no_events_disable(qtbot):
     """When all events are removed, a message should be displayed"""
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # This session also contains a plot, so this is essentially
@@ -182,12 +182,12 @@ def test_no_events_disable(qtbot):
 
 
 def test_no_events_issue_37(qtbot):
-    """https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/issues/37
+    """https://github.com/DC-analysis/DCscope/issues/37
 
     "ValueError: zero-size array to reduction operation minimum
     which has no identity" when all events are filtered out.
     """
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot
@@ -240,12 +240,12 @@ def test_no_events_issue_37(qtbot):
 def test_remove_dataset_h5py_error(qtbot):
     """Removing an activated dataset and activating Quick View fails
 
-    Unhandled exception in Shape-Out version 2.0.1.post2:
+    Unhandled exception in DCscope version 2.0.1.post2:
     Traceback (most recent call last):
-      File "/home/paul/repos/ShapeOut2/shapeout2/gui/main.py", line 235,
+      File "/home/paul/repos/DCscope/dcscope/gui/main.py", line 235,
         in adopt_pipeline
         self.widget_quick_view.update_feature_choices()
-      File "/home/paul/repos/ShapeOut2/shapeout2/gui/quick_view/qv_main.py",
+      File "/home/paul/repos/DCscope/dcscope/gui/quick_view/qv_main.py",
         line 635, in update_feature_choices
         ds_feats = [f for f in self.rtdc_ds.features if f in feats_scalar]
     [...]
@@ -257,7 +257,7 @@ def test_remove_dataset_h5py_error(qtbot):
       File "h5py/h5o.pyx", line 190, in h5py.h5o.open
     ValueError: Not a location (invalid object ID)
     """
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot
@@ -292,13 +292,13 @@ def test_remove_dataset_h5py_error(qtbot):
 
 
 def test_translate_polygon_filter_issue_115(qtbot):
-    """https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/issues/115
+    """https://github.com/DC-analysis/DCscope/issues/115
 
     When moving (with mouse drag-n-drop) a polygon filter in edit
     mode and then saving it, it is as if the translation is not
     detected. The polygon points are not updated.
     """
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot
@@ -381,12 +381,12 @@ def test_translate_polygon_filter_issue_115(qtbot):
 
 
 def test_update_polygon_filter_issue_26(qtbot):
-    """https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/issues/26
+    """https://github.com/DC-analysis/DCscope/issues/26
 
     The recomputation of the filter ray was not triggered for some
     reason.
     """
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot
@@ -463,13 +463,13 @@ def test_update_polygon_filter_issue_26(qtbot):
 
 
 def test_subtract_background(qtbot):
-    """https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/issues/54
+    """https://github.com/DC-analysis/DCscope/issues/54
 
     Adding the "Subtract Background"-CheckBox
     """
 
     # Create main window
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # Data with feature "image_bg"
@@ -537,7 +537,7 @@ def test_auto_contrast(qtbot):
     """auto contrast should change the displayed image"""
 
     # Create main window
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     path = datapath / "calibration_beads_47.rtdc"
@@ -596,7 +596,7 @@ def test_auto_contrast_qpi(qtbot):
     """auto contrast should change the displayed image"""
 
     # Create main window
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     path = datapath / "blood_rbc_qpi_data.rtdc"
@@ -656,7 +656,7 @@ def test_auto_contrast_vmin_vmax_qpi(qtbot):
     """auto contrast should change the vmin and vmax displayed to the user"""
 
     # Create main window
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     path = datapath / "blood_rbc_qpi_data.rtdc"
@@ -715,7 +715,7 @@ def test_contour_display(qtbot):
     """The contours should be a specific colour depending on the image"""
 
     # Create main window
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     path = datapath / "calibration_beads_47.rtdc"
@@ -775,7 +775,7 @@ def test_contour_display_qpi_amp(qtbot):
     """The contours should be a specific colour depending on the image"""
 
     # Create main window
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     path = datapath / "blood_rbc_qpi_data.rtdc"
@@ -839,7 +839,7 @@ def test_contour_display_qpi_pha(qtbot):
     """The contours should be a specific colour depending on the image"""
 
     # Create main window
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     path = datapath / "blood_rbc_qpi_data.rtdc"
@@ -907,7 +907,7 @@ def test_image_without_mask_data(qtbot, tmp_path):
         del h5["events/mask"]
 
     # Create main window
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     mw.add_dataslot(paths=[path_in])
@@ -948,7 +948,7 @@ def test_image_without_mask_data(qtbot, tmp_path):
 def test_isoelasticity_lines_with_lut_selection(qtbot):
     """Test look-up table selection for isoelasticity lines"""
 
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot
@@ -998,7 +998,7 @@ def test_select_x_y_axis_based_on_availiable_feature_name_issue_206(qtbot):
     in both datasets.
     """
 
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add dataslots
@@ -1060,7 +1060,7 @@ def test_select_x_y_axis_based_on_unavailable_feature_name_issue_206(qtbot):
     in both datasets.
     """
 
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add dataslots

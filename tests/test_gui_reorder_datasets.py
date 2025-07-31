@@ -1,9 +1,9 @@
 """Test of filter functionalities"""
 import pathlib
 
-from shapeout2.gui.main import ShapeOut2
-from shapeout2.gui.analysis import DlgSlotReorder
-from shapeout2 import session
+from dcscope.gui.main import DCscope
+from dcscope.gui.analysis import DlgSlotReorder
+from dcscope import session
 import pytest
 
 datapath = pathlib.Path(__file__).parent / "data"
@@ -20,7 +20,7 @@ def run_around_tests():
 
 
 def test_filter_min_max_inf(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add 3 dataslots

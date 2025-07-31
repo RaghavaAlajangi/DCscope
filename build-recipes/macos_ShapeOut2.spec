@@ -2,9 +2,9 @@
 from os.path import exists
 import warnings
 
-from shapeout2._version import version
+from dcscope._version import version
 
-NAME = "ShapeOut2"
+NAME = "DCscope"
 
 
 if not exists("./{}Launcher.py".format(NAME)):

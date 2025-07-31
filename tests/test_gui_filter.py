@@ -8,8 +8,8 @@ import numpy as np
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtCore import QEventLoop
 
-from shapeout2.gui.main import ShapeOut2
-from shapeout2 import session
+from dcscope.gui.main import DCscope
+from dcscope import session
 import pytest
 
 
@@ -54,7 +54,7 @@ def test_box_filter_selection_no_preselection_issue_67(qtbot):
     """
     path = make_fake_dataset()
 
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add the file
@@ -104,7 +104,7 @@ def test_box_filter_selection_no_preselection_issue_67(qtbot):
 def test_filter_min_max_inf(qtbot):
     path = make_fake_dataset()
 
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add the file
@@ -153,7 +153,7 @@ def test_polygon_filter_basic(qtbot):
             name="Triangle of Death",
         )
 
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add the file
@@ -215,7 +215,7 @@ def test_polygon_filter_delete(qtbot):
             name="Triangle of Death",
         )
 
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add the file

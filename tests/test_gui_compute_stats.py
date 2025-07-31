@@ -5,9 +5,9 @@ from unittest import mock
 
 from PyQt6 import QtWidgets
 
-from shapeout2.gui.main import ShapeOut2
-from shapeout2 import session
-from shapeout2.gui.compute.comp_stats import ComputeStatistics
+from dcscope.gui.main import DCscope
+from dcscope import session
+from dcscope.gui.compute.comp_stats import ComputeStatistics
 import pytest
 
 data_path = pathlib.Path(__file__).parent / "data"
@@ -24,7 +24,7 @@ def run_around_tests():
 
 
 def test_gui_stats_basic(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
     path = data_path / "calibration_beads_47.rtdc"
     mw.add_dataslot(paths=[path])
@@ -32,7 +32,7 @@ def test_gui_stats_basic(qtbot):
     # create dialog manually
     dlg = ComputeStatistics(mw, pipeline=mw.pipeline)
 
-    tdir = tempfile.mkdtemp("shapeout-test-stats_")
+    tdir = tempfile.mkdtemp("dcscope-test-stats_")
     tpath = pathlib.Path(tdir) / "out.tsv"
 
     # everything is autoselected, so we basically just click ok
@@ -44,7 +44,7 @@ def test_gui_stats_basic(qtbot):
     lines = tpath.read_text(encoding="utf-8").split("\n")
     assert len(lines) == 6
     assert lines[0].count("Statistics Output")
-    assert lines[1].count("Shape-Out")
+    assert lines[1].count("DCscope")
     assert lines[3].count("Path")
     assert lines[3].count("Mean Absolute tilt of raw contour")
     assert lines[3].split("\t")[3].strip() == "Events"

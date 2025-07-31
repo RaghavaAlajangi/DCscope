@@ -4,7 +4,7 @@ import tempfile
 
 import dclab
 import numpy as np
-from shapeout2 import pipeline
+from dcscope import pipeline
 
 
 def test_apply_filter_ray():

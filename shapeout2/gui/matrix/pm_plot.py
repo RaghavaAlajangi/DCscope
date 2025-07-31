@@ -12,7 +12,7 @@ class MatrixPlot(QtWidgets.QWidget):
 
     def __init__(self, identifier=None, state=None, *args, **kwargs):
         super(MatrixPlot, self).__init__(*args, **kwargs)
-        ref = importlib.resources.files("shapeout2.gui.matrix") / "pm_plot.ui"
+        ref = importlib.resources.files("dcscope.gui.matrix") / "pm_plot.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 

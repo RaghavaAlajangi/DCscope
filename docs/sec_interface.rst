@@ -5,14 +5,14 @@ User Interface
 
 Terminology
 ===========
-Shape-Out 2 introduces several terms in the user interface that also play
+DCscope introduces several terms in the user interface that also play
 a role in data analysis and are consequently used in the entire code base.
 
 basin
     A source of feature data stored in datasets other than the one opened
     by the user. For an overview on basins, please take a look at the
     :ref:`dclab documentation <dclab:sec_av_basins>`. When exporting data
-    from Shape-Out, the original dataset can be referenced via basins,
+    from DCscope, the original dataset can be referenced via basins,
     allowing you to reduce data redundancy.
 
 block matrix
@@ -28,16 +28,16 @@ filter
     A filter is a set of filtering options (box filter, polygon filter,
     downsampling, etc.) that can be applied to a slot (see the
     *Filter* tab in the :ref:`sec_analysis_view`). Filters can be exported
-    and imported again in Shape-Out 2 (.sof file format).
+    and imported again in DCscope (.sof file format).
 
 filter ray
     A filter ray is a list of filters that can be applied to a slot.
-    In Shape-Out 2, each row in the :ref:`sec_block_matrix` contains
+    In DCscope, each row in the :ref:`sec_block_matrix` contains
     one filter ray.
 
 pipeline
     A pipeline consists of all filters, slots, plots, and the filter rays
-    (the filter selection) applied to each slot. A Shape-Out 2 session file
+    (the filter selection) applied to each slot. A DCscope session file
     (.so2) stores all information necessary to rebuild a pipeline.
 
 plot
@@ -90,7 +90,7 @@ via the check box.
 Filters can also be modified, copied, removed and disabled.
 By default, all filters are disabled when they are created. To apply a filter
 to a dataset, click on the corresponding matrix element. The element changes
-its color from gray (incactive) to green (active). In Shape-Out, all
+its color from gray (incactive) to green (active). In DCscope, all
 filters that are applied to a dataset are called a **filter ray**.
 In the above example, the filter ray only consists of a single filter for each
 dataset. Filter rays may be different for each dataset. 

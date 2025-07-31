@@ -21,7 +21,7 @@ class DataFileNotFoundError(BaseException):
         super(DataFileNotFoundError, self).__init__(*args)
 
 
-class ShapeOutSessionJSONEncoder(json.JSONEncoder):
+class DCscopeSessionJSONEncoder(json.JSONEncoder):
     def default(self, o):
         if isinstance(o, pathlib.Path):
             return {"__type__": "path",
@@ -31,7 +31,7 @@ class ShapeOutSessionJSONEncoder(json.JSONEncoder):
             return float(o)
 
         # Let the base class default method raise the TypeError
-        return super(ShapeOutSessionJSONEncoder, self).default(o)
+        return super(DCscopeSessionJSONEncoder, self).default(o)
 
 
 class PathlibJSONDecoder(json.JSONDecoder):
@@ -43,7 +43,7 @@ class PathlibJSONDecoder(json.JSONDecoder):
     def compat_2_5_1(obj):
         """New standard for emodulus computation keyword arguments
 
-        This compatibility hook was introduced in Shape-Out 2.5.1
+        This compatibility hook was introduced in DCscope.5.1
         and is used to convert [calculation]: "emodulus model" which
         was deprecated in dclab 0.32.0 to [calculation]: "emodulus lut".
         """
@@ -96,7 +96,7 @@ def import_filters(path, pipeline, strict=False):
     ----------
     path: pathlib.Path or str or io.IOBase
         Path to the filter file
-    pipeline: shapeout2.pipeline.Pipeline
+    pipeline: dcscope.pipeline.Pipeline
         Analysis pipeline to import filters to
     strict: bool
         If False (default), new filter identifiers are created
@@ -185,7 +185,7 @@ def hash_file_partially(path, size=524288):
 def save_session(path, pipeline):
     """Save an entire pipeline session"""
     path = pathlib.Path(path)
-    tempdir = pathlib.Path(tempfile.mkdtemp(prefix="ShapeOut2-session-save_"))
+    tempdir = pathlib.Path(tempfile.mkdtemp(prefix="DCscope-session-save_"))
     # filters
     export_filters(tempdir / "filters.sof", pipeline)
     # slots
@@ -299,7 +299,7 @@ def open_session(path, pipeline=None, search_paths=None):
     ----------
     path: pathlib.Path or str
         Path to the session file
-    pipeline: shapeout2.pipeline.Pipeline or None
+    pipeline: dcscope.pipeline.Pipeline or None
         If a pipeline is given, it is reset before loading anything
     search_paths: list
         Paths to search for missing measurements; entries may be
@@ -373,7 +373,7 @@ def open_session(path, pipeline=None, search_paths=None):
 
 
 JSON_DUMP_KWARGS = {
-    "cls": ShapeOutSessionJSONEncoder,
+    "cls": DCscopeSessionJSONEncoder,
     "sort_keys": True,
     "indent": 2,
 }

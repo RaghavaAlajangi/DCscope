@@ -1,51 +1,51 @@
-|ShapeOut2|
+|DCscope|
 ===========
 
 |PyPI Version| |Build Status| |Coverage Status| |Docs Status|
 
 
-**Shape-Out 2** is the successor of
-`Shape-Out <https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut>`__,
+**DCscope** is the successor of
+`DCscope <https://github.com/DC-analysis/DCscope>`__,
 a graphical user interface for the analysis and visualization of RT-DC data sets.
-For more information please visit https://zellmechanik.com/.
+For more information please visit https://dc-cosmos.org/.
 
 
 Documentation
 -------------
 
 The documentation, including the code reference and examples, is available at
-`shapeout2.readthedocs.io <https://shapeout2.readthedocs.io>`__.
+`dcscope.readthedocs.io <https://dcscope.readthedocs.io>`__.
 
 
 Installation
 ------------
-Installers for Windows and macOS are available at the `release page <https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/releases>`__.
+Installers for Windows and macOS are available at the `release page <https://github.com/DC-analysis/DCscope/releases>`__.
 
-If you have Python 3 installed, you can install Shape-Out 2 with
+If you have Python 3 installed, you can install DCscope with
 
 ::
 
-    pip install shapeout2
+    pip install dcscope
 
 
-Citing Shape-Out
+Citing DCscope
 ----------------
-Please cite Shape-Out either in-line
+Please cite DCscope either in-line
 
 ::
 
-  (...) using the analysis software Shape-Out version 2.X.X (available at
-  https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2).
+  (...) using the analysis software DCscope version 2.X.X (available at
+  https://github.com/DC-analysis/DCscope).
 
 or in a bibliography
 
 ::
 
-  Paul Müller and others (2019), Shape-Out version 2.X.X: Analysis software
+  Paul Müller and others (2019), DCscope version 2.X.X: Analysis software
   for real-time deformability cytometry [Software]. Available at
-  https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2.
+  https://github.com/DC-analysis/DCscope.
 
-and replace ``2.X.X`` with the version of Shape-Out that you used.
+and replace ``2.X.X`` with the version of DCscope that you used.
 
 
 Testing
@@ -58,12 +58,12 @@ Testing
     pytest tests
 
 
-.. |ShapeOut2| image:: https://raw.github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/master/docs/logo/shapeout2_h50.png
-.. |PyPI Version| image:: https://img.shields.io/pypi/v/ShapeOut2.svg
-   :target: https://pypi.python.org/pypi/ShapeOut2
-.. |Build Status| image:: https://img.shields.io/github/actions/workflow/status/ZELLMECHANIK-DRESDEN/ShapeOut2/check.yml?branch=master
-   :target: https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/actions?query=workflow%3AChecks
-.. |Coverage Status| image:: https://img.shields.io/codecov/c/github/ZELLMECHANIK-DRESDEN/ShapeOut2/master.svg
-   :target: https://codecov.io/gh/ZELLMECHANIK-DRESDEN/ShapeOut2
-.. |Docs Status| image:: https://img.shields.io/readthedocs/shapeout2
-   :target: https://readthedocs.org/projects/shapeout2/builds/
+.. |DCscope| image:: https://raw.github.com/DC-analysis/DCscope/master/docs/logo/dcscope_h50.png
+.. |PyPI Version| image:: https://img.shields.io/pypi/v/DCscope.svg
+   :target: https://pypi.python.org/pypi/DCscope
+.. |Build Status| image:: https://img.shields.io/github/actions/workflow/status/DC-analysis/DCscope/check.yml?branch=master
+   :target: https://github.com/DC-analysis/DCscope/actions?query=workflow%3AChecks
+.. |Coverage Status| image:: https://img.shields.io/codecov/c/github/DC-analysis/DCscope/master.svg
+   :target: https://codecov.io/gh/DC-analysis/DCscope
+.. |Docs Status| image:: https://img.shields.io/readthedocs/dcscope
+   :target: https://readthedocs.org/projects/dcscope/builds/

@@ -1029,12 +1029,12 @@
   <customwidget>
    <class>FeatureComboBox</class>
    <extends>QComboBox</extends>
-   <header>shapeout2.gui.widgets</header>
+   <header>dcscope.gui.widgets</header>
   </customwidget>
   <customwidget>
    <class>RangeControl</class>
    <extends>QWidget</extends>
-   <header>shapeout2.gui.widgets</header>
+   <header>dcscope.gui.widgets</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

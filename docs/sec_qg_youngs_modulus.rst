@@ -3,7 +3,7 @@
 ===============
 Young's Modulus
 ===============
-With Shape-Out, it is possible to translate the measured area and deformation
+With DCscope, it is possible to translate the measured area and deformation
 to the Young's modulus based on numerical simulation for
 fully elastic spheres according to Mokbel et al. :cite:`Mokbel2017`.
 
@@ -76,7 +76,7 @@ available for the selected dataset.
 
 .. note::
 
-    In order to prevent users from doing a wrong analysis, Shape-Out does not
+    In order to prevent users from doing a wrong analysis, DCscope does not
     allow users to change the buffer in the *Dataset* tab if the buffer medium
     (e.g. 0.59% MC-PBS) was selected in Shape-In or CytoShot. Therefore,
     the analysis of the Young's modulus cannot be re-done for a different

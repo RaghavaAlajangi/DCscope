@@ -19,7 +19,7 @@ class ComputeStatistics(QtWidgets.QDialog):
     def __init__(self, parent, pipeline, *args, **kwargs):
         super(ComputeStatistics, self).__init__(parent=parent, *args, **kwargs)
         ref = importlib.resources.files(
-            "shapeout2.gui.compute") / "comp_stats.ui"
+            "dcscope.gui.compute") / "comp_stats.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 
@@ -128,7 +128,7 @@ class ComputeStatistics(QtWidgets.QDialog):
 
         # Header
         header = ["Statistics Output",
-                  "Shape-Out {}".format(version),
+                  "DCscope {}".format(version),
                   "",
                   "\t".join(h),
                   ]

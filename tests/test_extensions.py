@@ -6,7 +6,7 @@ import tempfile
 import pytest
 
 from dclab.rtdc_dataset import feat_anc_plugin
-from shapeout2 import extensions
+from dcscope import extensions
 
 
 data_path = pathlib.Path(__file__).parent / "data"

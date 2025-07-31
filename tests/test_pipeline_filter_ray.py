@@ -1,7 +1,7 @@
 import pathlib
 
 import numpy as np
-from shapeout2 import pipeline
+from dcscope import pipeline
 
 
 def test_get_heredity():

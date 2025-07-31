@@ -12,7 +12,7 @@ from pyqtgraph.graphicsItems.GradientEditorItem import Gradients
 
 from .. import plot_cache
 from .. import util
-from .widgets import ShapeOutColorBarItem
+from .widgets import DCscopeColorBarItem
 
 from .widgets import SimplePlotItem
 
@@ -45,7 +45,7 @@ class PipelinePlot(QtWidgets.QWidget):
 
     def __init__(self, parent, pipeline, plot_id, *args, **kwargs):
         super(PipelinePlot, self).__init__(parent=parent, *args, **kwargs)
-        ref = importlib.resources.files("shapeout2.gui") / "pipeline_plot.ui"
+        ref = importlib.resources.files("dcscope.gui") / "pipeline_plot.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 
@@ -248,7 +248,7 @@ class PipelinePlot(QtWidgets.QWidget):
         if colorbar_kwds:
             # add colorbar
             cmap = pg.ColorMap(*zip(*Gradients[sca["colormap"]]["ticks"]))
-            colorbar = ShapeOutColorBarItem(
+            colorbar = DCscopeColorBarItem(
                 yoffset=31,  # this is heuristic
                 height=min(300, lay["size y"] // 2),
                 colorMap=cmap,
@@ -281,7 +281,7 @@ class PipelinePlotItem(SimplePlotItem):
         """Performs export in new layout with axes labels set
 
         Overrides the basic functionality of SimplePlotItem.
-        See https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/issues/7
+        See https://github.com/DC-analysis/DCscope/issues/7
         """
         # Create a plot window
         win = pg.GraphicsLayoutWidget(
@@ -413,7 +413,7 @@ def add_label(text, anchor_parent, text_halign="center", text_valign="center",
     """Add a graphics label anchored to another item
 
     This is a hackish workaround that was made more elaborate
-    due to https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/issues/33.
+    due to https://github.com/DC-analysis/DCscope/issues/33.
 
     Parameters
     ----------
@@ -518,7 +518,7 @@ def add_isoelastics(plot_item, axis_x, axis_y, channel_width, pixel_size,
     # isoelastics would be shifted according to flow rate and.
     # viscosity. We could do it, but for visualization there is
     # really no need and also, the plots then look the same as
-    # in Shape-Out 1.
+    # in DCscope 1.
     try:
         iso = isodef.get(
             lut_identifier=lut_identifier if lut_identifier

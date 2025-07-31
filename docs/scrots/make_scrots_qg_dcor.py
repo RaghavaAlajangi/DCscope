@@ -3,14 +3,14 @@ import sys
 
 from PyQt6 import QtCore, QtTest
 from PyQt6.QtWidgets import QApplication
-from shapeout2.gui.main import ShapeOut2
-from shapeout2.gui import dcor
+from dcscope.gui.main import DCscope
+from dcscope.gui import dcor
 
 app = QApplication(sys.argv)
 
 QtCore.QLocale.setDefault(QtCore.QLocale(QtCore.QLocale.Language.C))
 
-mw = ShapeOut2()
+mw = DCscope()
 mw.settings.setValue("check for updates", 0)
 mw.settings.setValue("advanced/user confirm clear", 0)
 mw.settings.remove("dcor/api key")

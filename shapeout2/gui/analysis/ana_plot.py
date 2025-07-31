@@ -18,7 +18,7 @@ COLORMAPS = STATE_OPTIONS["scatter"]["colormap"]
 
 
 class PlotPanel(QtWidgets.QWidget):
-    #: Emitted when a shapeout2.pipeline.Plot is to be changed
+    #: Emitted when a dcscope.pipeline.Plot is to be changed
     plot_changed = QtCore.pyqtSignal(dict)
     #: Emitted when the pipeline is to be changed
     pipeline_changed = QtCore.pyqtSignal(dict)
@@ -26,11 +26,11 @@ class PlotPanel(QtWidgets.QWidget):
     def __init__(self, *args, **kwargs):
         super(PlotPanel, self).__init__(*args, **kwargs)
         ref = importlib.resources.files(
-            "shapeout2.gui.analysis") / "ana_plot.ui"
+            "dcscope.gui.analysis") / "ana_plot.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 
-        # current Shape-Out 2 pipeline
+        # current DCscope pipeline
         self._pipeline = None
         self._init_controls()
         self.update_content()
@@ -519,7 +519,7 @@ class PlotPanel(QtWidgets.QWidget):
     @show_wait_cursor
     def on_spacing_auto(self):
         """Iteratively find a good spacing for smooth contours (#110)"""
-        # https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/issues/110
+        # https://github.com/DC-analysis/DCscope/issues/110
         plot_id = self.current_plot.identifier
         # Get all datasets belonging to this plot.
         datasets, _ = self.pipeline.get_plot_datasets(plot_id)
@@ -630,7 +630,7 @@ class PlotPanel(QtWidgets.QWidget):
             self.setEnabled(False)
 
     def write_plot(self):
-        """Update the shapeout2.pipeline.Plot instance"""
+        """Update the dcscope.pipeline.Plot instance"""
         # get current index
         plot_state = self.read_pipeline_state()
         # this signal will update the main pipeline which will trigger

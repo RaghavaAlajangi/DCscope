@@ -11,5 +11,5 @@ from .simple_image_view import SimpleImageView
 from .simple_plot_widget import (SimplePlotItem,
                                  SimplePlotWidget,
                                  SimpleViewBox)
-from .so_colorbaritem import ShapeOutColorBarItem
+from .so_colorbaritem import DCscopeColorBarItem
 from .wait_cursor import show_wait_cursor, ShowWaitCursor

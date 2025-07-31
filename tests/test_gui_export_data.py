@@ -7,9 +7,9 @@ import dclab
 import numpy as np
 from PyQt6 import QtCore, QtWidgets
 import pytest
-from shapeout2.gui.main import ShapeOut2
-from shapeout2.gui import export
-from shapeout2 import session
+from dcscope.gui.main import DCscope
+from dcscope.gui import export
+from dcscope import session
 
 
 data_path = pathlib.Path(__file__).parent / "data"
@@ -26,7 +26,7 @@ def run_around_tests():
 
 
 def test_export_datasets_rtdc(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add 3 dataslots
@@ -34,7 +34,7 @@ def test_export_datasets_rtdc(qtbot):
     mw.add_dataslot(paths=[path, path, path])
 
     # perform the export
-    tmpd = tempfile.mkdtemp(prefix="shapeout2_test_data_export_")
+    tmpd = tempfile.mkdtemp(prefix="dcscope_test_data_export_")
     mw.settings.setValue("paths/export data", tmpd)
 
     # create export dialog manually (asks user for directory)
@@ -50,8 +50,8 @@ def test_export_datasets_rtdc(qtbot):
 
 
 def test_export_datasets_rtdc_no_override(qtbot):
-    """Shape-Out should not override existing files during export"""
-    mw = ShapeOut2()
+    """DCscope should not override existing files during export"""
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add 3 dataslots
@@ -59,7 +59,7 @@ def test_export_datasets_rtdc_no_override(qtbot):
     mw.add_dataslot(paths=[path, path, path])
 
     # perform the export
-    tmpd = tempfile.mkdtemp(prefix="shapeout2_test_data_export_")
+    tmpd = tempfile.mkdtemp(prefix="dcscope_test_data_export_")
     mw.settings.setValue("paths/export data", tmpd)
 
     for _ in range(2):
@@ -79,7 +79,7 @@ def test_export_datasets_rtdc_no_override(qtbot):
 @pytest.mark.filterwarnings(
     "ignore::dclab.features.emodulus.YoungsModulusLookupTableExceededWarning")
 def test_export_datasets_rtdc_emodulus_only_in_one_issue_80(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add 3 dataslots
@@ -98,7 +98,7 @@ def test_export_datasets_rtdc_emodulus_only_in_one_issue_80(qtbot):
     assert "emodulus" in ds0
 
     # perform the export
-    tmpd = tempfile.mkdtemp(prefix="shapeout2_test_data_export_")
+    tmpd = tempfile.mkdtemp(prefix="dcscope_test_data_export_")
     mw.settings.setValue("paths/export data", tmpd)
 
     with mock.patch.object(QtWidgets.QMessageBox, "warning") as mwarn:
@@ -130,7 +130,7 @@ def test_export_datasets_rtdc_emodulus_only_in_one_issue_80(qtbot):
 
 
 def test_export_datasets_rtdc_logs(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add 1 dataslots
@@ -144,7 +144,7 @@ def test_export_datasets_rtdc_logs(qtbot):
     mw.pipeline.set_element_active(slot_ids[0], filt_id)
 
     # perform the export
-    tmpd = tempfile.mkdtemp(prefix="shapeout2_test_data_export_")
+    tmpd = tempfile.mkdtemp(prefix="dcscope_test_data_export_")
     mw.settings.setValue("paths/export data", tmpd)
 
     # create export dialog manually (asks user for directory)
@@ -174,7 +174,7 @@ def test_export_datasets_rtdc_logs(qtbot):
 @pytest.mark.parametrize("strategy",
                          ["no-basins", "with-basins", "only-basins"])
 def test_export_datasets_basin_based(qtbot, strategy):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add 1 dataslots
@@ -188,7 +188,7 @@ def test_export_datasets_basin_based(qtbot, strategy):
     mw.pipeline.set_element_active(slot_ids[0], filt_id)
 
     # perform the export
-    tmpd = tempfile.mkdtemp(prefix="shapeout2_test_data_export_")
+    tmpd = tempfile.mkdtemp(prefix="dcscope_test_data_export_")
     mw.settings.setValue("paths/export data", tmpd)
 
     # create export dialog manually (asks user for directory)

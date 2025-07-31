@@ -14,7 +14,7 @@
    <bool>true</bool>
   </property>
   <property name="windowTitle">
-   <string>Shape-Out</string>
+   <string>DCscope</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -521,7 +521,7 @@
   <customwidget>
    <class>BlockMatrix</class>
    <extends>QWidget</extends>
-   <header>shapeout2.gui.matrix.block_matrix</header>
+   <header>dcscope.gui.matrix.block_matrix</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -5,16 +5,16 @@ import sys
 
 from PyQt6 import QtCore
 from PyQt6.QtWidgets import QApplication
-from shapeout2.gui import export
-from shapeout2.gui.main import ShapeOut2
+from dcscope.gui import export
+from dcscope.gui.main import DCscope
 
 
 here = pathlib.Path(__file__).parent
 
-# instantiate Shape-Out
+# instantiate DCscope
 app = QApplication(sys.argv)
 QtCore.QLocale.setDefault(QtCore.QLocale(QtCore.QLocale.Language.C))
-mw = ShapeOut2()
+mw = DCscope()
 
 # load session
 mw.on_action_open(here / "plot-export.so2")

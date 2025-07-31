@@ -9,7 +9,7 @@ class LME4Dataset(QtWidgets.QDialog):
     def __init__(self, parent, slot, *args, **kwargs):
         super(LME4Dataset, self).__init__(parent, *args, **kwargs)
         ref = importlib.resources.files(
-            "shapeout2.gui.compute") / "comp_lme4_dataset.ui"
+            "dcscope.gui.compute") / "comp_lme4_dataset.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 
@@ -32,7 +32,7 @@ class LME4Dataset(QtWidgets.QDialog):
 
         Parameters
         ----------
-        pipeline: shapeout2.pipeline.core.Pipeline
+        pipeline: dcscope.pipeline.core.Pipeline
             The pipeline from which to extract the filtered dataset
             using `self.identifier`.
         rlme4: dclab.lme4.wrapr.Rlme4

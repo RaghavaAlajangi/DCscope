@@ -14,10 +14,10 @@ class BasinsPanel(QtWidgets.QWidget):
     def __init__(self, *args, **kwargs):
         super(BasinsPanel, self).__init__(*args, **kwargs)
         ref = importlib.resources.files(
-            "shapeout2.gui.analysis") / "ana_basins.ui"
+            "dcscope.gui.analysis") / "ana_basins.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
-        # current Shape-Out 2 pipeline
+        # current DCscope pipeline
         self._pipeline = None
         self.data_role = QtCore.Qt.ItemDataRole.UserRole + 2
         self.treeWidget_basin_name.setColumnCount(1)

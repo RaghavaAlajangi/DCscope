@@ -20,7 +20,7 @@ class MatrixDataset(QtWidgets.QWidget):
         """
         super(MatrixDataset, self).__init__(*args, **kwargs)
         ref = importlib.resources.files(
-            "shapeout2.gui.matrix") / "dm_dataset.ui"
+            "dcscope.gui.matrix") / "dm_dataset.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 

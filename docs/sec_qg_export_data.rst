@@ -7,12 +7,12 @@ Export DC data
 Use cases
 =========
 Sometimes you would like to thin out the number of events or features in a dataset
-and export the result to a file. For instance, Shape-Out can export your DC data to the
+and export the result to a file. For instance, DCscope can export your DC data to the
 `flow cytometry standard (.fcs) <https://en.wikipedia.org/wiki/Flow_Cytometry_Standard>`_
 file format or to tab-separated values (.tsv) files for data analysis in other
 software. If you export to the .rtdc file format, you will stay in the DC
-ecosystem, allowing you to make use of dclab and Shape-Out or other software
-that can interface with HDF5 data. Since Shape-Out 2.22.0, it is also possible
+ecosystem, allowing you to make use of dclab and DCscope or other software
+that can interface with HDF5 data. Since DCscope.22.0, it is also possible
 to export event images as a video file.
 
 .. _qg_export_data:
@@ -38,12 +38,12 @@ Features
     longer.
 
 Storage strategy
-    Since Shape-Out 2.16 and with the introduction of :ref:`basins <dclab:sec_av_basins>`
-    (which tell dclab/Shape-Out where to find features belonging to the same dataset in
+    Since DCscope.16 and with the introduction of :ref:`basins <dclab:sec_av_basins>`
+    (which tell dclab/DCscope where to find features belonging to the same dataset in
     other locations) in dclab 0.58.0, you can select a storage strategy. The storage
     strategy defines whether features and/or basins are stored in the output file.
 
-    - No basins: This is the behavior in earlier versions of Shape-Out. Only
+    - No basins: This is the behavior in earlier versions of DCscope. Only
       the selected features are written to the .rtdc file. Use this option
       if you are certain that you do not want basins.
     - With basins: This is the recommended choice for normal usages. The
@@ -71,13 +71,13 @@ Frequently asked questions
 ==========================
 
 Why are not all features selected automatically? And why does exporting data take very long when I click on *select all* before?
-    By default, Shape-Out only selects those features that are readily available.
-    Some features, such as volume, have to be computed by Shape-Out before they
+    By default, DCscope only selects those features that are readily available.
+    Some features, such as volume, have to be computed by DCscope before they
     can be exported. The computation of features always happens for the **entire**
     dataset (not only for the features that you are exporting). Thus, even if
     you only export ~500 events, data export can take very long if the input
     file is large. This is also the reason why data export only takes long the
     first time you export from a dataset. Note that **you are not losing any
     feature data when you are exporting with the default settings**, unless you
-    are exporting to .fcs or .tsv files, because Shape-Out can also compute
+    are exporting to .fcs or .tsv files, because DCscope can also compute
     missing features after opening the exported files.

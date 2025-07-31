@@ -1,4 +1,4 @@
-# hashobj is imported from several other submodules in Shape-Out.
+# hashobj is imported from several other submodules in DCscope.
 # Would we need to add additional functionalities in the future, which
 # are not within the scope of dclab, then we can patch this method here.
 from dclab.util import hashobj  # noqa: F401

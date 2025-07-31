@@ -16,7 +16,7 @@ class BlockMatrix(QtWidgets.QWidget):
         """Helper class that wraps DataMatrix and PlotMatrix"""
         super(BlockMatrix, self).__init__(*args, **kwargs)
         ref = importlib.resources.files(
-            "shapeout2.gui.matrix") / "block_matrix.ui"
+            "dcscope.gui.matrix") / "block_matrix.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 

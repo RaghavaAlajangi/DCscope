@@ -1251,28 +1251,28 @@
   <customwidget>
    <class>FeatureComboBox</class>
    <extends>QComboBox</extends>
-   <header>shapeout2.gui.widgets</header>
+   <header>dcscope.gui.widgets</header>
   </customwidget>
   <customwidget>
    <class>SimplePlotWidget</class>
    <extends>QGraphicsView</extends>
-   <header>shapeout2.gui.widgets</header>
+   <header>dcscope.gui.widgets</header>
   </customwidget>
   <customwidget>
    <class>SimpleImageView</class>
    <extends>QGraphicsView</extends>
-   <header>shapeout2.gui.widgets</header>
+   <header>dcscope.gui.widgets</header>
   </customwidget>
   <customwidget>
    <class>QuickViewScatterWidget</class>
    <extends>QWidget</extends>
-   <header>shapeout2.gui.quick_view.qv_scatter</header>
+   <header>dcscope.gui.quick_view.qv_scatter</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>KeyValueTableWidget</class>
    <extends>QTableWidget</extends>
-   <header>shapeout2.gui.widgets</header>
+   <header>dcscope.gui.widgets</header>
   </customwidget>
  </customwidgets>
  <resources/>

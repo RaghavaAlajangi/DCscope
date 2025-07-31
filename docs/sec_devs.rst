@@ -2,20 +2,20 @@
 Developer's Guide
 =================
 
-If you are here, then you would like to contribute to Shape-Out.
+If you are here, then you would like to contribute to DCscope.
 Some parts of this document might need improvement and corrections.
 
 
 Versioning
 ==========
 We try to adhere to `semantic versioning <https://semver.org/>`_
-Shape-Out uses `setuptools-scm <https://setuptools-scm.readthedocs.io>`_
+DCscope uses `setuptools-scm <https://setuptools-scm.readthedocs.io>`_
 to automatically determine the version from the latest Git tag.
 
 Setuptools-scm might cause problems for you if you are working on your own fork
-or branch and after installing Shape-Out in your local environment you get
+or branch and after installing DCscope in your local environment you get
 a version like `0.0.0post1421_cdqut`. The solution is to pull the
-tags from the main repository and after that install Shape-Out again.
+tags from the main repository and after that install DCscope again.
 
 If you have figured out how to do this, please update this document with
 a PR :).
@@ -64,7 +64,7 @@ To build the documentation, simply run this in the root of the repository::
     sphinx-build . _build
 
 You can then open `_build/index.html` in your browser.
-The `documentation <https://shapeout2.readthedocs.io>`_ is automatically built
+The `documentation <https://dcscope.readthedocs.io>`_ is automatically built
 and deployed by readthedocs.io.
 
 Pull Requests
@@ -79,9 +79,9 @@ Make sure to
 
 GUI development
 ===============
-Shape-Out is based on the `Qt6 <https://doc.qt.io/qt-6>`_ framework.
+DCscope is based on the `Qt6 <https://doc.qt.io/qt-6>`_ framework.
 This means you can use `QtCreator/QtDesigner <https://www.youtube.com/watch?v=ot94H3-d5d8>`_
-to graphically design the `.ui` files that are then loaded when starting Shape-Out.
+to graphically design the `.ui` files that are then loaded when starting DCscope.
 We use `PyQt6` (not `PySide6`) to interface with Qt.
 
 Note that for some reason, new versions of QtDesigner produce .ui files
@@ -90,10 +90,10 @@ Python code). As a result, we have to use QtCreator 8 in order for things
 to work (If you have a better solution, please let us know.):
 https://github.com/qt-creator/qt-creator/releases/tag/v8.0.2
 
-The .ui files are loaded directly into Shape-Out and are not (as it is
+The .ui files are loaded directly into DCscope and are not (as it is
 shown in many tutorials) converted to .py files and added to git versioning.
 If this annoys you, because it makes your development experience (e.g. code
-completion) unbearable: Feel free to scratch that itch and migrate Shape-Out
+completion) unbearable: Feel free to scratch that itch and migrate DCscope
 to the .py-style scheme. The only requirements for that to be merged are:
 
 - put all .ui files in a directory called `ui` in the root of the repository

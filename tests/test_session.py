@@ -6,7 +6,7 @@ import tempfile
 import dclab
 import h5py
 import numpy as np
-from shapeout2 import pipeline, session
+from dcscope import pipeline, session
 
 
 data_path = pathlib.Path(__file__).parent / "data"
@@ -88,7 +88,7 @@ def make_pipeline(nslots=2, nfilters=3, nplots=1, paths=None):
 
 
 def test_2_5_1_replace_emodulus_model():
-    """In Shape-Out 2.5.1 we replace "emodulus model" with "emodulus lut"."""
+    """In DCscope.5.1 we replace "emodulus model" with "emodulus lut"."""
     spath = pathlib.Path(__file__).parent / "data" / "version_2_1_0_basic.so2"
     pl = session.open_session(spath)
     sc = pl.slots[0].config
@@ -99,7 +99,7 @@ def test_2_5_1_replace_emodulus_model():
 
 
 def test_2_1_1_new_key_emodulus_enabled():
-    """In Shape-Out 2.1.1 we introduces the "emodulus enabled" key
+    """In DCscope.1.1 we introduces the "emodulus enabled" key
 
     If it is disabled (reservoir measurements), then the emodulus
     analysis options are not shown in the Slot options. See also
@@ -114,7 +114,7 @@ def test_2_1_1_new_key_emodulus_enabled():
 
 
 def test_file_hash():
-    tempdir = pathlib.Path(tempfile.mkdtemp(prefix="test_shapeout2_session_"))
+    tempdir = pathlib.Path(tempfile.mkdtemp(prefix="test_dcscope_session_"))
     # custom path to measurement
     p0 = pathlib.Path(__file__).parent / "data" / "calibration_beads_47.rtdc"
     pp = tempdir / "calibration_beads_47.rtdc"
@@ -129,7 +129,7 @@ def test_file_hash():
 
 
 def test_missing_path_in_session():
-    tempdir = pathlib.Path(tempfile.mkdtemp(prefix="test_shapeout2_session_"))
+    tempdir = pathlib.Path(tempfile.mkdtemp(prefix="test_dcscope_session_"))
     spath = tempdir / "session.so2"
     # custom path to measurement
     p0 = pathlib.Path(__file__).parent / "data" / "calibration_beads_47.rtdc"
@@ -160,7 +160,7 @@ def test_missing_path_in_session():
 
 
 def test_relative_paths():
-    tempdir = pathlib.Path(tempfile.mkdtemp(prefix="test_shapeout2_session_"))
+    tempdir = pathlib.Path(tempfile.mkdtemp(prefix="test_dcscope_session_"))
     # custom path for data
     p0 = pathlib.Path(__file__).parent / "data" / "calibration_beads_47.rtdc"
     datadir = tempdir / "data"
@@ -213,7 +213,7 @@ def test_save_all_polygon_filters_issue_101():
     pl.filters[0].polylist.append(pf1.unique_id)
     old_state = pl.__getstate__()
 
-    tempdir = pathlib.Path(tempfile.mkdtemp(prefix="test_shapeout2_session_"))
+    tempdir = pathlib.Path(tempfile.mkdtemp(prefix="test_dcscope_session_"))
     spath = tempdir / "session.so2"
 
     session.save_session(spath, pl)
@@ -245,7 +245,7 @@ def test_simple_save_open_session():
     pl = make_pipeline()
     old_state = pl.__getstate__()
 
-    tempdir = pathlib.Path(tempfile.mkdtemp(prefix="test_shapeout2_session_"))
+    tempdir = pathlib.Path(tempfile.mkdtemp(prefix="test_dcscope_session_"))
     spath = tempdir / "session.so2"
 
     session.save_session(spath, pl)
@@ -262,7 +262,7 @@ def test_simple_save_open_session():
 
 
 def test_wrong_hash():
-    tempdir = pathlib.Path(tempfile.mkdtemp(prefix="test_shapeout2_session_"))
+    tempdir = pathlib.Path(tempfile.mkdtemp(prefix="test_dcscope_session_"))
     spath = tempdir / "session.so2"
     # custom path to measurement
     p0 = pathlib.Path(__file__).parent / "data" / "calibration_beads_47.rtdc"

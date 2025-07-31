@@ -4,7 +4,7 @@ import os.path as op
 import platform
 import sys
 
-import shapeout2
+import dcscope
 
 # make library available
 cdir = op.dirname(op.abspath(__file__))
@@ -12,10 +12,10 @@ pdir = op.dirname(cdir)
 sys.path.insert(0, pdir)
 
 # get version
-version = shapeout2.__version__
+version = dcscope.__version__
 
 # read dummy
-with io.open(op.join(cdir, "win_shapeout2.iss_dummy"), 'r') as dummy:
+with io.open(op.join(cdir, "win_dcscope.iss_dummy"), 'r') as dummy:
     iss = dummy.readlines()
 
 # replace keywords
@@ -28,5 +28,5 @@ for i in range(len(iss)):
             platform.architecture()[0])
 
 # write iss
-with io.open(op.join(cdir, "win_shapeout2.iss"), 'w') as issfile:
+with io.open(op.join(cdir, "win_dcscope.iss"), 'w') as issfile:
     issfile.writelines(iss)

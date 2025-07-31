@@ -57,13 +57,13 @@ jobs:
         # Display must be available globally for linux to know where xvfb is
         QT_DEBUG_PLUGINS: 1
       run: |
-        python -m shapeout2 --version
+        python -m dcscope --version
     - name: Test with pytest
       env:
         # github token required for testing update.py
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-         coverage run --source=shapeout2 -m pytest -x tests
+         coverage run --source=dcscope -m pytest -x tests
     - name: Lint with flake8
       run: |
         flake8 --exclude _version.py .
@@ -79,4 +79,4 @@ jobs:
       if: runner.os == 'macOS'
       working-directory: ./build-recipes
       run: |
-        bash ./macos_build_app.sh ShapeOut2 $(python -m shapeout2 --version)
+        bash ./macos_build_app.sh DCscope $(python -m dcscope --version)

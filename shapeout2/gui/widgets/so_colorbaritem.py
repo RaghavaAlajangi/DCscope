@@ -1,16 +1,16 @@
 import pyqtgraph as pg
 
 
-class ShapeOutColorBarItem(pg.ColorBarItem):
+class DCscopeColorBarItem(pg.ColorBarItem):
     def __init__(self, yoffset, height, label, colorMap, *args, **kwargs):
-        """pg.ColorBarItem modified for Shape-Out
+        """pg.ColorBarItem modified for DCscope
 
         - Added option to define height
         - translate the colorbar so that it is aligned with the plot
         - show the label on the right-hand axis
         - increase the contents margins
         """
-        super(ShapeOutColorBarItem, self).__init__(
+        super(DCscopeColorBarItem, self).__init__(
             colorMap=colorMap,
             # TODO: Removing `cmap=colorMap` results in grayscale colormaps.
             *args, **kwargs)

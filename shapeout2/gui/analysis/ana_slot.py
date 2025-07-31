@@ -16,7 +16,7 @@ from .dlg_slot_reorder import DlgSlotReorder
 
 
 class SlotPanel(QtWidgets.QWidget):
-    #: Emitted when a shapeout2.pipeline.Dataslot is to be changed
+    #: Emitted when a dcscope.pipeline.Dataslot is to be changed
     slot_changed = QtCore.pyqtSignal(dict)
     #: Emitted when the pipeline is to be changed
     pipeline_changed = QtCore.pyqtSignal(dict)
@@ -24,11 +24,11 @@ class SlotPanel(QtWidgets.QWidget):
     def __init__(self, *args, **kwargs):
         super(SlotPanel, self).__init__(*args, **kwargs)
         ref = importlib.resources.files(
-            "shapeout2.gui.analysis") / "ana_slot.ui"
+            "dcscope.gui.analysis") / "ana_slot.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 
-        # current Shape-Out 2 pipeline
+        # current DCscope pipeline
         self._pipeline = None
         # signals
         self.toolButton_reorder.clicked.connect(self.on_reorder_slots)
@@ -497,7 +497,7 @@ class SlotPanel(QtWidgets.QWidget):
             self.setEnabled(False)
 
     def write_slot(self):
-        """Update the shapeout2.pipeline.Dataslot instance"""
+        """Update the dcscope.pipeline.Dataslot instance"""
         slot_state = self.read_pipeline_state()
         # this signal will update the main pipeline which will trigger
         # a call to `set_pipeline` and `update_content`.

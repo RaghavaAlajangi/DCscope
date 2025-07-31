@@ -15,12 +15,12 @@ class FilterPanel(QtWidgets.QWidget):
     """Filter panel widget
 
     The filtering panel visualizes the properties of a
-    :class:`shapeout2.pipeline.filter.Filter` instance,
+    :class:`dcscope.pipeline.filter.Filter` instance,
     i.e. box filters, list of polygon filters, filter
     name, etc. Their `__getstate__` and `__setstate__`
     functions are compatible.
     """
-    #: Emitted when a shapeout2.pipeline.Filter is to be changed
+    #: Emitted when a dcscope.pipeline.Filter is to be changed
     filter_changed = QtCore.pyqtSignal(dict)
     #: Emitted when the pipeline is to be changed
     pipeline_changed = QtCore.pyqtSignal(dict)
@@ -30,10 +30,10 @@ class FilterPanel(QtWidgets.QWidget):
     def __init__(self, *args, **kwargs):
         super(FilterPanel, self).__init__(*args, **kwargs)
         ref = importlib.resources.files(
-            "shapeout2.gui.analysis") / "ana_filter.ui"
+            "dcscope.gui.analysis") / "ana_filter.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
-        # current Shape-Out 2 pipeline
+        # current DCscope pipeline
         self._pipeline = None
         self.setUpdatesEnabled(False)
         #: contains the range widgets for the box filters
@@ -333,7 +333,7 @@ class FilterPanel(QtWidgets.QWidget):
             self.write_pipeline_state(self.current_filter.__getstate__())
 
     def write_filter(self):
-        """Update the shapeout2.pipeline.Filter instance"""
+        """Update the dcscope.pipeline.Filter instance"""
         # get current index
         filter_state = self.read_pipeline_state()
         # this signal will update the main pipeline which will trigger

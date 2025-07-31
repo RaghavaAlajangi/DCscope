@@ -1,6 +1,6 @@
 =========
 Changelog
 =========
-List of changes in-between Shape-Out releases.
+List of changes in-between DCscope releases.
 
 .. include_changelog:: ../CHANGELOG

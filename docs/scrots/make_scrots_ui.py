@@ -8,14 +8,14 @@ import sys
 import dclab
 from PyQt6 import QtCore
 from PyQt6.QtWidgets import QApplication
-from shapeout2.gui.main import ShapeOut2
-from shapeout2 import session
+from dcscope.gui.main import DCscope
+from dcscope import session
 
 app = QApplication(sys.argv)
 
 QtCore.QLocale.setDefault(QtCore.QLocale(QtCore.QLocale.Language.C))
 
-mw = ShapeOut2()
+mw = DCscope()
 mw.settings.setValue("check for updates", 0)
 mw.settings.setValue("advanced/user confirm clear", 0)
 

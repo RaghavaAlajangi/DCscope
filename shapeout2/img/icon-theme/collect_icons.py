@@ -61,8 +61,8 @@ icons = {
 
 # theme index file
 index = """[Icon Theme]
-Name=ShapeOutMix
-Comment=Mix of themes for Shape-Out 2
+Name=DCscopeMix
+Comment=Mix of themes for DCscope
 
 Directories={directories}
 """
@@ -106,14 +106,14 @@ if __name__ == "__main__":
     with (here / "index.theme").open("w") as fd:
         directories = sorted(set(directories))
         fd.write(index.format(directories=",".join(
-            ["shapeout2"] + directories)))
-        # Shape-Out icons
-        fd.write(index_item.format(directory="shapeout2", res="16"))
-        fd.write(index_item.format(directory="shapeout2", res="22"))
-        fd.write(index_item.format(directory="shapeout2", res="24"))
-        fd.write(index_item.format(directory="shapeout2", res="32"))
-        fd.write(index_item.format(directory="shapeout2", res="64"))
-        fd.write(index_item.format(directory="shapeout2", res="128"))
+            ["dcscope"] + directories)))
+        # DCscope icons
+        fd.write(index_item.format(directory="dcscope", res="16"))
+        fd.write(index_item.format(directory="dcscope", res="22"))
+        fd.write(index_item.format(directory="dcscope", res="24"))
+        fd.write(index_item.format(directory="dcscope", res="32"))
+        fd.write(index_item.format(directory="dcscope", res="64"))
+        fd.write(index_item.format(directory="dcscope", res="128"))
         # theme icons
         for dd in directories:
             for res in resolutions_used:

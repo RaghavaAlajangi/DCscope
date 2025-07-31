@@ -1,2 +1,2 @@
-from .main import ShapeOut2  # noqa: F401
+from .main import DCscope  # noqa: F401
 from . import widgets  # noqa: F401

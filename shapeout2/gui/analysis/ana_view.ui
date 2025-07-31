@@ -224,43 +224,43 @@
   <customwidget>
    <class>FilterPanel</class>
    <extends>QWidget</extends>
-   <header>shapeout2.gui.analysis</header>
+   <header>dcscope.gui.analysis</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>MetaPanel</class>
    <extends>QWidget</extends>
-   <header>shapeout2.gui.analysis</header>
+   <header>dcscope.gui.analysis</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>PlotPanel</class>
    <extends>QWidget</extends>
-   <header>shapeout2.gui.analysis</header>
+   <header>dcscope.gui.analysis</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>SlotPanel</class>
    <extends>QWidget</extends>
-   <header>shapeout2.gui.analysis</header>
+   <header>dcscope.gui.analysis</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>LogPanel</class>
    <extends>QWidget</extends>
-   <header>shapeout2.gui.analysis</header>
+   <header>dcscope.gui.analysis</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>TablesPanel</class>
    <extends>QWidget</extends>
-   <header>shapeout2.gui.analysis</header>
+   <header>dcscope.gui.analysis</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>BasinsPanel</class>
    <extends>QWidget</extends>
-   <header>shapeout2.gui.analysis</header>
+   <header>dcscope.gui.analysis</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -7,7 +7,7 @@ Imprint and disclaimer
 ----------------------
 For more information, please refer to the imprint and disclaimer
 (Impressum und Haftungsausschluss) at
-https://www.zellmechanik.com/Imprint.html.
+https://www.dc-cosmos.org/Imprint.html.
 
 
 Privacy policy

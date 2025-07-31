@@ -1,12 +1,12 @@
 .. _index:
 
 
-.. figure:: logo/shapeout2_h50.png
+.. figure:: logo/dcscope_h50.png
 
 |
 
-Shape-Out 2 is a user interface for data analysis in deformability cytometry (DC).
-This is the documentation of Shape-Out version |release|.
+DCscope is a user interface for data analysis in deformability cytometry (DC).
+This is the documentation of DCscope version |release|.
 
 .. rtd_pdf::
 

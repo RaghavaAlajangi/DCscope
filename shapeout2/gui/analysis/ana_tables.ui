@@ -182,12 +182,12 @@
   <customwidget>
    <class>SimplePlotWidget</class>
    <extends>QGraphicsView</extends>
-   <header>shapeout2.gui.widgets</header>
+   <header>dcscope.gui.widgets</header>
   </customwidget>
   <customwidget>
    <class>SimpleImageView</class>
    <extends>QGraphicsView</extends>
-   <header>shapeout2.gui.widgets</header>
+   <header>dcscope.gui.widgets</header>
   </customwidget>
  </customwidgets>
  <resources/>

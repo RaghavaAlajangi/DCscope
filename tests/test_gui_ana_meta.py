@@ -2,7 +2,7 @@ import pytest
 
 import numpy as np
 
-from shapeout2.gui.analysis import ana_meta
+from dcscope.gui.analysis import ana_meta
 
 
 @pytest.mark.parametrize("input,output", [

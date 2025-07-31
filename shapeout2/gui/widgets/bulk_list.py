@@ -9,7 +9,7 @@ class BulkList(QtWidgets.QWidget):
         """A checkable list with bulk (de-)selection button"""
         super(BulkList, self).__init__(parent=parent, *args, **kwargs)
         ref = importlib.resources.files(
-            "shapeout2.gui.widgets") / "bulk_list.ui"
+            "dcscope.gui.widgets") / "bulk_list.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 

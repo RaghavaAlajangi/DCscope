@@ -145,7 +145,7 @@
   <customwidget>
    <class>BulkList</class>
    <extends>QWidget</extends>
-   <header>shapeout2.gui.widgets.bulk_list</header>
+   <header>dcscope.gui.widgets.bulk_list</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

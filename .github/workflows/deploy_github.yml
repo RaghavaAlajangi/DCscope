@@ -35,24 +35,24 @@ jobs:
       working-directory: ./build-recipes
       run: |
         pip install -r win_build_requirements.txt
-        pyinstaller -y --log-level=WARN win_ShapeOut2.spec
+        pyinstaller -y --log-level=WARN win_DCscope.spec
         # Run the binary (the most simple test)
-        dist\\ShapeOut2\\ShapeOut2.exe --version
+        dist\\DCscope\\DCscope.exe --version
         python win_make_iss.py
-        ISCC.exe /Q win_shapeout2.iss
+        ISCC.exe /Q win_dcscope.iss
     - name: Build macOS app
       if: runner.os == 'macOS'
       working-directory: ./build-recipes
       run: |
-        bash ./macos_build_app.sh ShapeOut2 ${{ env.RELEASE_VERSION }}
+        bash ./macos_build_app.sh DCscope ${{ env.RELEASE_VERSION }}
     - name: Release Assets
       uses: softprops/action-gh-release@v1
       with:
-        name: ShapeOut ${{ env.RELEASE_VERSION }}
+        name: DCscope ${{ env.RELEASE_VERSION }}
         draft: true
         prerelease: false
         body: |
-            ![](https://img.shields.io/github/downloads/ZELLMECHANIK-DRESDEN/ShapeOut2/${{ env.RELEASE_VERSION }}/total.svg)
+            ![](https://img.shields.io/github/downloads/DC-analysis/DCscope/${{ env.RELEASE_VERSION }}/total.svg)
         files: |
           ./build-recipes/dist/*.dmg
           ./build-recipes/dist/*.pkg

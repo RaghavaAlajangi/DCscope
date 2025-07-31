@@ -6,7 +6,7 @@ from PyQt6 import QtCore
 
 
 TMPDIR = tempfile.mkdtemp(prefix=time.strftime(
-    "shapeout2_test_%H.%M_"))
+    "dcscope_test_%H.%M_"))
 
 pytest_plugins = ["pytest-qt"]
 
@@ -14,9 +14,9 @@ pytest_plugins = ["pytest-qt"]
 def pytest_configure(config):
     """This is ran before all tests"""
     # disable update checking
-    QtCore.QCoreApplication.setOrganizationName("Zellmechanik-Dresden")
-    QtCore.QCoreApplication.setOrganizationDomain("zellmechanik.com")
-    QtCore.QCoreApplication.setApplicationName("shapeout2")
+    QtCore.QCoreApplication.setOrganizationName("DC-analysis")
+    QtCore.QCoreApplication.setOrganizationDomain("dc-cosmos.org")
+    QtCore.QCoreApplication.setApplicationName("dcscope")
     QtCore.QSettings.setDefaultFormat(QtCore.QSettings.Format.IniFormat)
     settings = QtCore.QSettings()
     settings.setValue("check for updates", 0)
@@ -30,9 +30,9 @@ def pytest_unconfigure(config):
     """
     called before test process is exited.
     """
-    QtCore.QCoreApplication.setOrganizationName("Zellmechanik-Dresden")
-    QtCore.QCoreApplication.setOrganizationDomain("zellmechanik.com")
-    QtCore.QCoreApplication.setApplicationName("shapeout2")
+    QtCore.QCoreApplication.setOrganizationName("DC-analysis")
+    QtCore.QCoreApplication.setOrganizationDomain("dc-cosmos.org")
+    QtCore.QCoreApplication.setApplicationName("dcscope")
     QtCore.QSettings.setDefaultFormat(QtCore.QSettings.Format.IniFormat)
     settings = QtCore.QSettings()
     settings.setValue("advanced/user confirm clear", 1)

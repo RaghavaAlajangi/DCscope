@@ -8,8 +8,8 @@ from PyQt6 import QtCore, QtWidgets
 
 import pytest
 
-from shapeout2.gui.main import ShapeOut2
-from shapeout2.gui.export.e2filter import ExportFilter
+from dcscope.gui.main import DCscope
+from dcscope.gui.export.e2filter import ExportFilter
 
 data_path = pathlib.Path(__file__).parent / "data"
 
@@ -36,7 +36,7 @@ def test_gui_export_filter_ray(qtbot, monkeypatch):
             name="Triangle of Death",
         )
 
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
     mw.add_dataslot(paths=[path])
 
@@ -93,7 +93,7 @@ def test_gui_export_polygon_filters(qtbot, monkeypatch):
             name="Second Triangle of Death",
         )
 
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
     mw.add_dataslot(paths=[path])
 

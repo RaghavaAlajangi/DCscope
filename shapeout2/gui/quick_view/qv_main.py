@@ -34,12 +34,12 @@ class QuickView(QtWidgets.QWidget):
         self._hover_event_idx = None
         super(QuickView, self).__init__(*args, **kwargs)
         ref = importlib.resources.files(
-            "shapeout2.gui.quick_view") / "qv_main.ui"
+            "dcscope.gui.quick_view") / "qv_main.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 
         ref = importlib.resources.files(
-            "shapeout2.gui.quick_view") / "qv_style.css"
+            "dcscope.gui.quick_view") / "qv_style.css"
         with importlib.resources.as_file(ref) as path_css:
             stylesheet = pathlib.Path(path_css).read_text()
         self.groupBox_image.setStyleSheet(stylesheet)

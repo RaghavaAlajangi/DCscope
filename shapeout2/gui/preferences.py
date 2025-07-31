@@ -40,7 +40,7 @@ class Preferences(QtWidgets.QDialog):
 
     def __init__(self, parent, *args, **kwargs):
         super(Preferences, self).__init__(parent=parent, *args, **kwargs)
-        ref = importlib.resources.files("shapeout2.gui") / "preferences.ui"
+        ref = importlib.resources.files("dcscope.gui") / "preferences.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
         self.settings = QtCore.QSettings()
@@ -227,7 +227,7 @@ class Preferences(QtWidgets.QDialog):
         host = access_token.get_hostname(path, pwd)
         api_key = access_token.get_api_key(path, pwd)
         cert = access_token.get_certificate(path, pwd)
-        # write certificate to our global Shape-Out certs directory
+        # write certificate to our global DCscope certs directory
         ca_path = pathlib.Path(
             QStandardPaths.writableLocation(
                 QStandardPaths.StandardLocation.AppDataLocation)
@@ -332,9 +332,9 @@ class Preferences(QtWidgets.QDialog):
                     if devmode != value:
                         msg = QtWidgets.QMessageBox()
                         msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
-                        msg.setText("Please restart Shape-Out for the changes "
+                        msg.setText("Please restart DCscope for the changes "
                                     + "to take effect.")
-                        msg.setWindowTitle("Restart Shape-Out")
+                        msg.setWindowTitle("Restart DCscope")
                         msg.exec()
             elif isinstance(widget, QtWidgets.QLineEdit):
                 value = widget.text().strip()

@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 class ExportData(QtWidgets.QDialog):
     def __init__(self, parent, pipeline, *args, **kwargs):
         super(ExportData, self).__init__(parent=parent, *args, **kwargs)
-        ref = importlib.resources.files("shapeout2.gui.export") / "e2data.ui"
+        ref = importlib.resources.files("dcscope.gui.export") / "e2data.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 
@@ -187,7 +187,7 @@ class ExportData(QtWidgets.QDialog):
                     ds.export.fcs,
                     dict(path=path,
                          features=[ff for ff in features if ff in ds.features],
-                         meta_data={"Shape-Out version": version},
+                         meta_data={"DCscope version": version},
                          override=False)
                 ))
             elif self.file_format == "tsv":
@@ -195,7 +195,7 @@ class ExportData(QtWidgets.QDialog):
                     ds.export.tsv,
                     dict(path=path,
                          features=[ff for ff in features if ff in ds.features],
-                         meta_data={"Shape-Out version": version},
+                         meta_data={"DCscope version": version},
                          override=False)
                 ))
             elif self.radioButton_avi.isChecked():

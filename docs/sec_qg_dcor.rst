@@ -6,7 +6,7 @@ Accessing DCOR data
 
 The `deformability cytometry open repository (DCOR)
 <https://dcor.mpl.mpg.de>`_ allows you to upload and access RT-DC
-datasets online (internet connection required). In Shape-Out 2, you
+datasets online (internet connection required). In DCscope, you
 can access parts of the dataset (e.g. just two features) without
 downloading the entire data file (which includes image, contour, and
 traces information). This saves disk space and time when accessing

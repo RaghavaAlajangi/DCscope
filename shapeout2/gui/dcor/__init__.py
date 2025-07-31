@@ -17,7 +17,7 @@ class DCORLoader(QtWidgets.QDialog):
     def __init__(self, parent, *args, **kwargs):
         """Search and load DCOR data"""
         super(DCORLoader, self).__init__(parent=parent, *args, **kwargs)
-        ref = importlib.resources.files("shapeout2.gui.dcor") / "dcor.ui"
+        ref = importlib.resources.files("dcscope.gui.dcor") / "dcor.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 
@@ -101,9 +101,9 @@ class DCORLoader(QtWidgets.QDialog):
 
     @QtCore.pyqtSlot()
     def on_help(self):
-        """Show Shape-Out 2 docs"""
+        """Show DCscope docs"""
         webbrowser.open(
-            "https://shapeout2.readthedocs.io/en/stable/sec_qg_dcor.html")
+            "https://dcscope.readthedocs.io/en/stable/sec_qg_dcor.html")
 
     @run_async  # comment-out for debugging
     @show_wait_cursor

@@ -41,28 +41,28 @@ pg.setConfigOption("antialias", True)
 pg.setConfigOption("imageAxisOrder", "row-major")
 
 # set Qt icon theme search path
-ref = importlib.resources.files("shapeout2.img") / "icon.png"
+ref = importlib.resources.files("dcscope.img") / "icon.png"
 with importlib.resources.as_file(ref) as icon_path:
     theme_path = icon_path.with_name("icon-theme")
 if theme_path.exists():
     QtGui.QIcon.setThemeSearchPaths([str(theme_path)])
     QtGui.QIcon.setThemeName(".")
 else:
-    warnings.warn("ShapeOut theme path not available")
+    warnings.warn("DCscope theme path not available")
 
 
-class ShapeOut2(QtWidgets.QMainWindow):
+class DCscope(QtWidgets.QMainWindow):
     plots_changed = QtCore.pyqtSignal()
 
     def __init__(self, *arguments):
-        """Initialize Shape-Out 2
+        """Initialize DCscope
 
         If you pass the "--version" command line argument, the
         application will print the version after initialization
         and exit.
         """
-        super(ShapeOut2, self).__init__()
-        ref = importlib.resources.files("shapeout2.gui") / "main.ui"
+        super(DCscope, self).__init__()
+        ref = importlib.resources.files("dcscope.gui") / "main.ui"
         with importlib.resources.as_file(ref) as path_ui:
             uic.loadUi(path_ui, self)
 
@@ -73,12 +73,12 @@ class ShapeOut2(QtWidgets.QMainWindow):
         # `self.settings` may return integer/bool in the same session,
         # in the next session, it will reliably return strings. Lists
         # of strings (comma-separated) work nicely though.
-        QtCore.QCoreApplication.setOrganizationName("Zellmechanik-Dresden")
-        QtCore.QCoreApplication.setOrganizationDomain("zellmechanik.com")
-        QtCore.QCoreApplication.setApplicationName("shapeout2")
+        QtCore.QCoreApplication.setOrganizationName("DC-analysis")
+        QtCore.QCoreApplication.setOrganizationDomain("dc-cosmos.org")
+        QtCore.QCoreApplication.setApplicationName("dcscope")
         QtCore.QSettings.setDefaultFormat(QtCore.QSettings.Format.IniFormat)
 
-        #: Shape-Out settings
+        #: DCscope settings
         self.settings = QtCore.QSettings()
         # Register custom DCOR CA bundle directory with dclab
         ca_path = pathlib.Path(
@@ -120,7 +120,7 @@ class ShapeOut2(QtWidgets.QMainWindow):
                 + traceback.format_exc(),
             )
         # GUI
-        self.setWindowTitle(f"Shape-Out {version}")
+        self.setWindowTitle(f"DCscope {version}")
         # Disable native menu bar (e.g. on Mac)
         self.menubar.setNativeMenuBar(False)
         # File menu
@@ -579,16 +579,16 @@ class ShapeOut2(QtWidgets.QMainWindow):
 
     @QtCore.pyqtSlot()
     def on_action_about(self):
-        gh = "ZELLMECHANIK-DRESDEN/ShapeOut2"
-        rtd = "shapeout2.readthedocs.io"
+        gh = "DC-analysis/DCscope"
+        rtd = "dcscope.readthedocs.io"
         about_text = (
-            f"Shape-Out 2 is a graphical user interface for the analysis "
+            f"DCscope is a graphical user interface for the analysis "
             f"and visualization of deformability cytometry data sets.<br><br>"
             f"Author: Paul Müller<br>"
             f"GitHub: <a href='https://github.com/{gh}'>{gh}</a><br>"
             f"Documentation: <a href='https://{rtd}'>{rtd}</a><br>"
         )
-        QtWidgets.QMessageBox.about(self, f"Shape-Out {version}", about_text)
+        QtWidgets.QMessageBox.about(self, f"DCscope {version}", about_text)
 
     @QtCore.pyqtSlot()
     def on_action_change_dataset_order(self):
@@ -609,7 +609,7 @@ class ShapeOut2(QtWidgets.QMainWindow):
                 self.on_action_check_update_finished)
             self._update_thread.start()
 
-            ghrepo = "ZELLMECHANIK-DRESDEN/ShapeOut2"
+            ghrepo = "DC-analysis/DCscope"
 
             QtCore.QMetaObject.invokeMethod(
                 self._update_worker,
@@ -631,13 +631,13 @@ class ShapeOut2(QtWidgets.QMainWindow):
         web = mdict["releases url"]
         dlb = mdict["binary url"]
         msg = QtWidgets.QMessageBox()
-        msg.setWindowTitle("Shape-Out {} available!".format(ver))
+        msg.setWindowTitle("DCscope {} available!".format(ver))
         msg.setTextFormat(QtCore.Qt.TextFormat.RichText)
-        text = "You can install Shape-Out {} ".format(ver)
+        text = "You can install DCscope {} ".format(ver)
         if dlb is not None:
             text += 'from a <a href="{}">direct download</a>. '.format(dlb)
         else:
-            text += 'by running `pip install --upgrade shapeout2`. '
+            text += 'by running `pip install --upgrade dcscope`. '
         text += 'Visit the <a href="{}">official release page</a>!'.format(web)
         msg.setText(text)
         msg.exec()
@@ -659,7 +659,7 @@ class ShapeOut2(QtWidgets.QMainWindow):
                 self, "R not found!",
                 "The R executable was not found. Please add it "
                 + "to the PATH variable or define it manually in the "
-                + "Shape-Out preferences.")
+                + "DCscope preferences.")
 
     @QtCore.pyqtSlot()
     def on_action_compute_statistics(self):
@@ -680,7 +680,7 @@ class ShapeOut2(QtWidgets.QMainWindow):
         if yes:
             session.clear_session(self.pipeline)
             self.reload_pipeline()
-            self.setWindowTitle(f"Shape-Out {version}")
+            self.setWindowTitle(f"DCscope {version}")
         return yes
 
     @QtCore.pyqtSlot()
@@ -709,7 +709,7 @@ class ShapeOut2(QtWidgets.QMainWindow):
 
     @QtCore.pyqtSlot()
     def on_action_docs(self):
-        webbrowser.open("https://shapeout2.readthedocs.io")
+        webbrowser.open("https://dcscope.readthedocs.io")
 
     @QtCore.pyqtSlot()
     def on_action_export_data(self):
@@ -814,14 +814,14 @@ class ShapeOut2(QtWidgets.QMainWindow):
 
     @QtCore.pyqtSlot()
     def on_action_open(self, path=None):
-        """Open a Shape-Out 2 session"""
+        """Open a DCscope session"""
         if self.pipeline.slots or self.pipeline.filters:
             if not self.on_action_clear():
                 return
         if path is None:
             path, _ = QtWidgets.QFileDialog.getOpenFileName(
-                self, 'Open session', '', 'Shape-Out 2 session (*.so2)',
-                'Shape-Out 2 session (*.so2)',
+                self, 'Open session', '', 'DCscope session (*.so2)',
+                'DCscope session (*.so2)',
                 QtWidgets.QFileDialog.Option.DontUseNativeDialog)
         if path:
             search_paths = []
@@ -850,13 +850,13 @@ class ShapeOut2(QtWidgets.QMainWindow):
             self.show()
             self.reload_pipeline()
             self.setWindowTitle(
-                f"{pathlib.Path(path).name} [Shape-Out {version}]")
+                f"{pathlib.Path(path).name} [DCscope {version}]")
 
     @QtCore.pyqtSlot()
     def on_action_preferences(self):
         """Show the preferences dialog"""
         dlg = preferences.Preferences(self)
-        dlg.setWindowTitle("Shape-Out Preferences")
+        dlg.setWindowTitle("DCscope Preferences")
         dlg.feature_changed.connect(self.plots_changed)
         dlg.feature_changed.connect(self.on_quickview_refresh)
         dlg.exec()
@@ -872,13 +872,13 @@ class ShapeOut2(QtWidgets.QMainWindow):
     @QtCore.pyqtSlot()
     def on_action_save(self):
         path, _ = QtWidgets.QFileDialog.getSaveFileName(
-            self, 'Save session', '', 'Shape-Out 2 session (*.so2)')
+            self, 'Save session', '', 'DCscope session (*.so2)')
         if path:
             if not path.endswith(".so2"):
                 path += ".so2"
             session.save_session(path, self.pipeline)
             self.setWindowTitle(
-                f"{pathlib.Path(path).name} [Shape-Out {version}]")
+                f"{pathlib.Path(path).name} [DCscope {version}]")
 
     @QtCore.pyqtSlot()
     def on_action_software(self):
@@ -889,7 +889,7 @@ class ShapeOut2(QtWidgets.QMainWindow):
                 scipy,
                 ]
 
-        sw_text = f"Shape-Out {version}\n\n"
+        sw_text = f"DCscope {version}\n\n"
         sw_text += f"Python {sys.version}\n\n"
         sw_text += "Modules:\n"
         for lib in libs:
@@ -1064,7 +1064,7 @@ def excepthook(etype, value, trace):
         prints the standard Python header: ``Traceback (most recent
         call last)``.
     """
-    vinfo = f"Unhandled exception in Shape-Out version {version}:\n"
+    vinfo = f"Unhandled exception in DCscope version {version}:\n"
     tmp = traceback.format_exception(etype, value, trace)
     exception = "".join([vinfo]+tmp)
 

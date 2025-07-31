@@ -145,7 +145,7 @@ class Extension:
         self.suffix = self.path.suffix
 
     def __repr__(self):
-        return f"<Shape-Out Extension {self.path} at {hex(id(self))}>"
+        return f"<DCscope Extension {self.path} at {hex(id(self))}>"
 
     @property
     def description(self):

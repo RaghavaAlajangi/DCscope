@@ -1,4 +1,4 @@
-from shapeout2 import util
+from dcscope import util
 
 
 def test_get_valid_filename():

@@ -7,9 +7,9 @@ import h5py
 import numpy as np
 import pytest
 
-from shapeout2.gui.main import ShapeOut2
-from shapeout2.gui import bulk
-from shapeout2 import session
+from dcscope.gui.main import DCscope
+from dcscope.gui import bulk
+from dcscope import session
 
 datapath = pathlib.Path(__file__).parent / "data"
 
@@ -44,7 +44,7 @@ def run_around_tests():
 
 def test_manual_basic(qtbot):
     """Most simple test"""
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot
@@ -83,7 +83,7 @@ def test_manual_basic(qtbot):
 
 def test_manual_wrong_medium(qtbot):
     """Deliberately set wrong medium"""
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot
@@ -113,7 +113,7 @@ def test_manual_wrong_medium(qtbot):
 
 
 def test_temperature_feature(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add custom dataslot
@@ -139,7 +139,7 @@ def test_temperature_feature(qtbot):
 
 
 def test_viscosity(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add custom dataslot
@@ -165,7 +165,7 @@ def test_viscosity(qtbot):
 
 
 def test_viscosity_compute(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add custom dataslot
@@ -199,7 +199,7 @@ def test_viscosity_compute(qtbot):
 
 def test_wrong_medium_viscosity(qtbot):
     """Deliberately set wrong visosity"""
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot
@@ -227,7 +227,7 @@ def test_wrong_medium_viscosity(qtbot):
 
 
 def test_lut_selection(qtbot):
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     # add a dataslot

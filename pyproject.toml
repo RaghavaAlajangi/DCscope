@@ -7,7 +7,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "shapeout2"
+name = "dcscope"
 authors = [
     # In alphabetical order.
     {name = "Benedikt Hartmann"},
@@ -41,14 +41,14 @@ dependencies = [
 dynamic = ["version"]
 
 [project.scripts]
-shapeout2 = "shapeout2.__main__:main"
+dcscope = "dcscope.__main__:main"
 
 [project.urls]
-source = "https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2"
-tracker = "https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/issues"
-documentation = "https://shapeout2.readthedocs.io"
-changelog = "https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/blob/master/CHANGELOG"
+source = "https://github.com/DC-analysis/DCscope"
+tracker = "https://github.com/DC-analysis/DCscope/issues"
+documentation = "https://dcscope.readthedocs.io"
+changelog = "https://github.com/DC-analysis/DCscope/blob/master/CHANGELOG"
 
 [tool.setuptools_scm]
-write_to = "shapeout2/_version.py"
+write_to = "dcscope/_version.py"
 version_scheme = "post-release"

@@ -366,7 +366,7 @@
         <item row="0" column="5">
          <widget class="QLabel" name="label_5">
           <property name="text">
-           <string>&lt;a href=&quot;https://shapeout2.readthedocs.io/en/stable/sec_qg_youngs_modulus.html&quot;&gt; help &lt;/a&gt;</string>
+           <string>&lt;a href=&quot;https://dcscope.readthedocs.io/en/stable/sec_qg_youngs_modulus.html&quot;&gt; help &lt;/a&gt;</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -671,7 +671,7 @@
   <customwidget>
    <class>DoubleSpinBoxNan</class>
    <extends>QDoubleSpinBox</extends>
-   <header>shapeout2.gui.widgets</header>
+   <header>dcscope.gui.widgets</header>
   </customwidget>
   <customwidget>
    <class>ColorButton</class>

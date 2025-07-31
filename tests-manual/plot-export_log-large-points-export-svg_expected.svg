@@ -608,7 +608,7 @@
             </g>
         </g>
     </g>
-    <g fill="none" stroke="black" stroke-width="1" fill-rule="evenodd" stroke-linecap="square" stroke-linejoin="bevel" id="ShapeOutColorBarItem_1">
+    <g fill="none" stroke="black" stroke-width="1" fill-rule="evenodd" stroke-linecap="square" stroke-linejoin="bevel" id="DCscopeColorBarItem_1">
         <g fill="none" stroke="black" stroke-width="1" fill-rule="evenodd" stroke-linecap="square" stroke-linejoin="bevel" id="ViewBox_1">
             <g fill="none" stroke="none" font-family="Ubuntu" font-size="14.6667" font-weight="400" font-style="normal">
                 <path vector-effect="non-scaling-stroke" fill-rule="evenodd" d="M524.0,74.0 L539.0,74.0 L539.0,274.0 L524.0,274.0 L524.0,74.0 "/>

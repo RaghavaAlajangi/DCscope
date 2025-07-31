@@ -6,7 +6,7 @@ from .simple_plot_widget import SimpleViewBox
 
 
 class SimpleImageView(pg.ImageView):
-    """Custom class for data visualization in Shape-Out"""
+    """Custom class for data visualization in DCscope"""
 
     def __init__(self, *args, **kwargs):
         super(SimpleImageView, self).__init__(view=SimpleImageViewBox(),

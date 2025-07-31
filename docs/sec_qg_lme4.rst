@@ -3,13 +3,13 @@
 =============================================
 Statistical significance testing (R and lme4)
 =============================================
-Since version 2.5.0, Shape-Out 2 allows you to quantify the statistical
+Since version 2.5.0, DCscope allows you to quantify the statistical
 significance (p-value) when comparing two measurement groups. For this to
 work, you need to have R installed (tested with
 `R 4.1.2 <https://cran.r-project.org>`_ ).
 The analysis uses linear mixed effects models (LMM) as described
 in :cite:`Herbig2018` and yields results identical to those obtained
-with Shape-Out 1.
+with DCscope 1.
 
 The LMM analysis is performed using the lme4 R package
 and is based on the :ref:`implementation in dclab <dclab:sec_av_lme4>`
@@ -26,7 +26,7 @@ We would like to quantify the difference between human skeletal stem cells
 model system for SSCs) using a likelihood ratio test based on LMM.
 
 Please load :download:`this session <../tests/data/version_2_5_0_dcor_lme4.so2>`
-into Shape-Out (via *File | Open Session*). The experimental data are accessed
+into DCscope (via *File | Open Session*). The experimental data are accessed
 from DCOR, so you will need a working internet connection. The session contains
 five datasets:
 
@@ -96,7 +96,7 @@ To check whether the deformation we see is not just an inherent deformation
 analysis.
 
 Please load :download:`this session <../tests/data/version_2_5_0_dcor_lme4_diff.so2>`
-into Shape-Out (via *File | Open Session*). The experimental data are accessed
+into DCscope (via *File | Open Session*). The experimental data are accessed
 from DCOR, so you will need a working internet connection. The session contains
 ten datasets (reservoir measurements in addition to the measurements above).
 

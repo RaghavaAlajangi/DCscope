@@ -22,13 +22,13 @@ class MissingFeatureWarning(UserWarning):
 
 class Pipeline(object):
     def __init__(self, state=None):
-        #: Filters are instances of :class:`shapeout2.pipeline.Filter`
+        #: Filters are instances of :class:`dcscope.pipeline.Filter`
         self.filters = []
-        #: Plots are instances of :class:`shapeout2.pipeline.Plot`
+        #: Plots are instances of :class:`dcscope.pipeline.Plot`
         self.plots = []
         #: Filter rays of the current pipeline
         self.rays = {}
-        #: Slots are instances of :class:`shapeout2.pipeline.Dataslot`
+        #: Slots are instances of :class:`dcscope.pipeline.Dataslot`
         self.slots = []
         #: individual element states
         self.element_states = {}
@@ -111,7 +111,7 @@ class Pipeline(object):
 
         Parameters
         ----------
-        filt: shapeout2.pipeline.Filter or dict
+        filt: dcscope.pipeline.Filter or dict
             Filter instance or its state from Filter.__getstate__()
         index: int
             Position in the filter list, defaults to `len(self.filters)`
@@ -146,7 +146,7 @@ class Pipeline(object):
 
         Parameters
         ----------
-        plot: shapeout2.pipeline.Plot or dict
+        plot: dcscope.pipeline.Plot or dict
             Plot instance or its state from Plot.__getstate__()
         index: int
             Position in the plot list, defaults to `len(self.plots)`
@@ -183,7 +183,7 @@ class Pipeline(object):
 
         Parameters
         ----------
-        slot: shapeout2.pipeline.Dataslot or dict
+        slot: dcscope.pipeline.Dataslot or dict
             Dataslot representing an experimental dataset or its
             state from Dataslot.__getstate__(); At least `slot`
             or `path` need to be specified

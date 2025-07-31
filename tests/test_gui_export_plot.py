@@ -6,9 +6,9 @@ import tempfile
 
 from PyQt6 import QtWidgets
 import pytest
-from shapeout2.gui.main import ShapeOut2
-from shapeout2.gui import export
-from shapeout2 import session
+from dcscope.gui.main import DCscope
+from dcscope.gui import export
+from dcscope import session
 
 
 datapath = pathlib.Path(__file__).parent / "data"
@@ -28,13 +28,13 @@ def test_export_single_plot(qtbot, monkeypatch):
     """Export of single plots not possible up until version 2.1.4"""
     spath = datapath / "version_2_1_0_basic.so2"
 
-    mw = ShapeOut2()
+    mw = DCscope()
     qtbot.addWidget(mw)
 
     mw.on_action_open(spath)
 
     # perform the export
-    tmpd = tempfile.mkdtemp(suffix="", prefix="shapeout2_test_plot_export_")
+    tmpd = tempfile.mkdtemp(suffix="", prefix="dcscope_test_plot_export_")
 
     tmpf = os.path.join(tmpd, "no_suffix")
     assert not pathlib.Path(tmpf).exists()

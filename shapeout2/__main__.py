@@ -12,7 +12,7 @@ def main(splash=True):
     if splash:
         from PyQt6.QtWidgets import QSplashScreen
         from PyQt6.QtGui import QPixmap
-        ref = importlib.resources.files("shapeout2.img") / "splash.png"
+        ref = importlib.resources.files("dcscope.img") / "splash.png"
         with importlib.resources.as_file(ref) as splash_path:
             splash_pix = QPixmap(str(splash_path))
         splash = QSplashScreen(splash_pix)
@@ -22,17 +22,17 @@ def main(splash=True):
         app.processEvents(QEventLoop.ProcessEventsFlag.AllEvents, 300)
 
     from PyQt6 import QtCore, QtGui
-    from .gui import ShapeOut2
+    from .gui import DCscope
 
     # Set Application Icon
-    ref = importlib.resources.files("shapeout2.img") / "icon.png"
+    ref = importlib.resources.files("dcscope.img") / "icon.png"
     with importlib.resources.as_file(ref) as icon_path:
         app.setWindowIcon(QtGui.QIcon(str(icon_path)))
 
     # Use dots as decimal separators
     QtCore.QLocale.setDefault(QtCore.QLocale(QtCore.QLocale.Language.C))
 
-    window = ShapeOut2(*app.arguments()[1:])
+    window = DCscope(*app.arguments()[1:])
 
     if splash:
         splash.finish(window)

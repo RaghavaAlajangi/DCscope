@@ -4,7 +4,7 @@ from pyqtgraph import exporters
 
 
 class SimplePlotItem(pg.PlotItem):
-    """Custom class for data visualization in Shape-Out
+    """Custom class for data visualization in DCscope
 
     Modifications include:
     - right click menu only with "Export..."
@@ -29,7 +29,7 @@ class SimplePlotItem(pg.PlotItem):
                         showValues=False,
                         )
         # show grid
-        # https://github.com/ZELLMECHANIK-DRESDEN/ShapeOut2/issues/75
+        # https://github.com/DC-analysis/DCscope/issues/75
         # self.showGrid(x=True, y=True, alpha=.1)
         # visualization
         self.hideButtons()
@@ -64,7 +64,7 @@ class SimplePlotItem(pg.PlotItem):
 
 
 class SimplePlotWidget(pg.PlotWidget):
-    """Custom class for data visualization in Shape-Out
+    """Custom class for data visualization in DCscope
 
     Modifications include:
     - white background
