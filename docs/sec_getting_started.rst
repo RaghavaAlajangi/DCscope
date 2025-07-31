@@ -74,4 +74,4 @@ If you use DCscope in a scientific publication, please cite it with:
    Available at https://github.com/DC-analysis/DCscope.
 
 If the journal does not accept ``and others``, you can fill in the missing
-names in the authors section of the `pyproject.toml file <https://github.com/DC-analysis/DCscope/blob/master/pyproject.toml>`_.
+names in the authors section of the `pyproject.toml file <https://github.com/DC-analysis/DCscope/blob/main/pyproject.toml>`_.

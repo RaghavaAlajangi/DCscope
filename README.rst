@@ -58,12 +58,12 @@ Testing
     pytest tests
 
 
-.. |DCscope| image:: https://raw.github.com/DC-analysis/DCscope/master/docs/logo/dcscope_h50.png
+.. |DCscope| image:: https://raw.github.com/DC-analysis/DCscope/main/docs/logo/dcscope_h50.png
 .. |PyPI Version| image:: https://img.shields.io/pypi/v/DCscope.svg
    :target: https://pypi.python.org/pypi/DCscope
-.. |Build Status| image:: https://img.shields.io/github/actions/workflow/status/DC-analysis/DCscope/check.yml?branch=master
+.. |Build Status| image:: https://img.shields.io/github/actions/workflow/status/DC-analysis/DCscope/check.yml?branch=main
    :target: https://github.com/DC-analysis/DCscope/actions?query=workflow%3AChecks
-.. |Coverage Status| image:: https://img.shields.io/codecov/c/github/DC-analysis/DCscope/master.svg
+.. |Coverage Status| image:: https://img.shields.io/codecov/c/github/DC-analysis/DCscope/main.svg
    :target: https://codecov.io/gh/DC-analysis/DCscope
 .. |Docs Status| image:: https://img.shields.io/readthedocs/dcscope
    :target: https://readthedocs.org/projects/dcscope/builds/

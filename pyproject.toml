@@ -47,7 +47,7 @@ dcscope = "dcscope.__main__:main"
 source = "https://github.com/DC-analysis/DCscope"
 tracker = "https://github.com/DC-analysis/DCscope/issues"
 documentation = "https://dcscope.readthedocs.io"
-changelog = "https://github.com/DC-analysis/DCscope/blob/master/CHANGELOG"
+changelog = "https://github.com/DC-analysis/DCscope/blob/main/CHANGELOG"
 
 [tool.setuptools_scm]
 write_to = "dcscope/_version.py"
