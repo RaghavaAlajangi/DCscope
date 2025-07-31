@@ -69,8 +69,8 @@ If you use DCscope in a scientific publication, please cite it with:
 
 .. pull-quote::
 
-   Paul Müller and others (2019), DCscope version 2.X.X: Graphical user
-   interface for analysis and visualization of RT-DC data sets [Software].
+   Paul Müller and others (2019), DCscope (formerly Shape-Out) version 2.X.X:
+   Graphical user interface for analysis and visualization of RT-DC data sets [Software].
    Available at https://github.com/DC-analysis/DCscope.
 
 If the journal does not accept ``and others``, you can fill in the missing

@@ -5,7 +5,8 @@
 
 |
 
-DCscope is a user interface for data analysis in deformability cytometry (DC).
+DCscope (formerly Shape-Out) is a user interface for data analysis in
+deformability cytometry (DC).
 This is the documentation of DCscope version |release|.
 
 .. rtd_pdf::

@@ -3,13 +3,6 @@
 Imprint/Impressum
 =================
 
-Imprint and disclaimer
-----------------------
-For more information, please refer to the imprint and disclaimer
-(Impressum und Haftungsausschluss) at
-https://www.dc-cosmos.org/Imprint.html.
-
-
 Privacy policy
 --------------
 This documentation is hosted on https://readthedocs.org/ whose `privacy

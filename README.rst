@@ -4,10 +4,8 @@
 |PyPI Version| |Build Status| |Coverage Status| |Docs Status|
 
 
-**DCscope** is the successor of
-`DCscope <https://github.com/DC-analysis/DCscope>`__,
-a graphical user interface for the analysis and visualization of RT-DC data sets.
-For more information please visit https://dc-cosmos.org/.
+**DCscope** (formerly Shape-Out) is a graphical user interface for the
+analysis and visualization of RT-DC data sets.
 
 
 Documentation
@@ -34,16 +32,16 @@ Please cite DCscope either in-line
 
 ::
 
-  (...) using the analysis software DCscope version 2.X.X (available at
-  https://github.com/DC-analysis/DCscope).
+  (...) using the analysis software DCscope (formerly Shape-Out) version 2.X.X
+  (available at https://github.com/DC-analysis/DCscope).
 
 or in a bibliography
 
 ::
 
-  Paul Müller and others (2019), DCscope version 2.X.X: Analysis software
-  for real-time deformability cytometry [Software]. Available at
-  https://github.com/DC-analysis/DCscope.
+  Paul Müller and others (2019), DCscope (formerly Shape-Out) version 2.X.X:
+  Analysis software for real-time deformability cytometry [Software].
+  Available at https://github.com/DC-analysis/DCscope.
 
 and replace ``2.X.X`` with the version of DCscope that you used.
 
