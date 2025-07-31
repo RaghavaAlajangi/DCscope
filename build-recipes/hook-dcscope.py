@@ -7,7 +7,7 @@
 # The full license is in the file COPYING.txt, distributed with this software.
 # -----------------------------------------------------------------------------
 
-# Hook for DCscope: https://github.com/ZellMechanik-Dresden/DCscope
+# Hook for DCscope: https://github.com/DC-analysis/DCscope
 from PyInstaller.utils.hooks import collect_data_files
 
 # Data files

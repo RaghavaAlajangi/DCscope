@@ -58,7 +58,7 @@ Testing
     pytest tests
 
 
-.. |DCscope| image:: https://raw.github.com/DC-analysis/DCscope/main/docs/logo/dcscope_h50.png
+.. |DCscope| image:: https://raw.github.com/DC-analysis/DCscope/main/docs/artwork/dcscope_splash.png
 .. |PyPI Version| image:: https://img.shields.io/pypi/v/DCscope.svg
    :target: https://pypi.python.org/pypi/DCscope
 .. |Build Status| image:: https://img.shields.io/github/actions/workflow/status/DC-analysis/DCscope/check.yml?branch=main

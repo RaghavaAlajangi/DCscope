@@ -1,7 +1,7 @@
 .. _index:
 
 
-.. figure:: logo/dcscope_h50.png
+.. figure:: artwork/dcscope_splash.png
 
 |
 
