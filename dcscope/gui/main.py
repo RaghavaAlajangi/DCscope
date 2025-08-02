@@ -1,5 +1,6 @@
-import pathlib
 import importlib.resources
+import logging
+import pathlib
 import signal
 import sys
 import traceback
@@ -49,6 +50,8 @@ if theme_path.exists():
     QtGui.QIcon.setThemeName(".")
 else:
     warnings.warn("DCscope theme path not available")
+
+logger = logging.getLogger(__name__)
 
 
 class DCscope(QtWidgets.QMainWindow):
@@ -1065,22 +1068,29 @@ def excepthook(etype, value, trace):
         call last)``.
     """
     vinfo = f"Unhandled exception in DCscope version {version}:\n"
-    tmp = traceback.format_exception(etype, value, trace)
-    exception = "".join([vinfo]+tmp)
+    exc_long = "".join(
+        [vinfo] + traceback.format_exception(etype, value, trace))
+    exc_short = "".join(
+        [vinfo] + traceback.format_exception(etype, value, trace, limit=3))
+
+    logger.error(exc_long)
 
     errorbox = QtWidgets.QMessageBox()
     errorbox.setIcon(QtWidgets.QMessageBox.Icon.Critical)
+    copy_button = QtWidgets.QPushButton('Copy message to clipboard and close')
+    copy_button.clicked.connect(lambda: copy_text_to_clipboard(exc_long))
     errorbox.addButton(QtWidgets.QPushButton('Close'),
                        QtWidgets.QMessageBox.ButtonRole.YesRole)
-    errorbox.addButton(QtWidgets.QPushButton(
-        'Copy text && Close'), QtWidgets.QMessageBox.ButtonRole.NoRole)
-    errorbox.setText(exception)
-    ret = errorbox.exec()
-    print(exception)
-    if ret == 1:
-        cb = QtWidgets.QApplication.clipboard()
-        cb.clear(mode=cb.Mode.Clipboard)
-        cb.setText(exception)
+    errorbox.addButton(copy_button, QtWidgets.QMessageBox.ButtonRole.NoRole)
+    errorbox.setDetailedText(exc_long)
+    errorbox.setText(exc_short)
+    errorbox.exec()
+
+
+def copy_text_to_clipboard(text):
+    cb = QtWidgets.QApplication.clipboard()
+    cb.clear()
+    cb.setText(text)
 
 
 # Make Ctr+C close the app
