@@ -133,7 +133,6 @@ class DCscope(QtWidgets.QMainWindow):
             self.on_action_clear_datasets)
         self.actionClearSession.triggered.connect(self.on_action_clear)
         self.actionOpenSession.triggered.connect(self.on_action_open)
-        self.actionQuit.triggered.connect(self.on_action_quit)
         self.actionSaveSession.triggered.connect(self.on_action_save)
         # Edit menu
         self.actionChangeDatasetOrder.triggered.connect(
@@ -516,6 +515,7 @@ class DCscope(QtWidgets.QMainWindow):
             self.subwindows_plots[plot_id] = sub
         sub.show()
 
+    @QtCore.pyqtSlot(QtCore.QEvent)
     def closeEvent(self, event):
         """Determine what happens when the user wants to quit"""
         if self.pipeline.slots or self.pipeline.filters:
@@ -526,6 +526,7 @@ class DCscope(QtWidgets.QMainWindow):
         else:
             event.accept()
 
+    @QtCore.pyqtSlot(QtCore.QEvent)
     def dragEnterEvent(self, e):
         """Whether files are accepted"""
         if e.mimeData().hasUrls():
@@ -533,6 +534,7 @@ class DCscope(QtWidgets.QMainWindow):
         else:
             e.ignore()
 
+    @QtCore.pyqtSlot(QtCore.QEvent)
     @widgets.show_wait_cursor
     def dropEvent(self, e):
         """Add dropped files to view"""
@@ -863,14 +865,6 @@ class DCscope(QtWidgets.QMainWindow):
         dlg.feature_changed.connect(self.plots_changed)
         dlg.feature_changed.connect(self.on_quickview_refresh)
         dlg.exec()
-
-    @QtCore.pyqtSlot()
-    def on_action_quit(self):
-        """Determine what happens when the user wants to quit"""
-        if self.pipeline.slots or self.pipeline.filters:
-            if not self.on_action_clear():
-                return
-        QtCore.QCoreApplication.quit()
 
     @QtCore.pyqtSlot()
     def on_action_save(self):

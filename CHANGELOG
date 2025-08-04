@@ -2,6 +2,8 @@
  - docs: add missing image for data export
  - fix: error message dialog limited to traceback length of three
  - fix: copy error text to clipboard did not work in error message dialog
+ - enh: decorate QEvent-accepting slots in `main.py`
+ - ref: only use closeEvent when exiting DCscope GUI
 2.22.1
  - feat: notify user when loaded data have different pipeline hashes (#217)
  - fix: prevent accidental polygon filter creation (#148)
