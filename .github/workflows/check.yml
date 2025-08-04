@@ -69,6 +69,10 @@ jobs:
         flake8 --exclude _version.py .
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
+      # FIXME Limit runtime until
+      # https://github.com/codecov/codecov-action/issues/1316 is resolved
+      timeout-minutes: 1
+      continue-on-error: true
     - name: Create app and check if it runs (macOS)
       if: runner.os == 'macOS'
       working-directory: ./build-recipes
