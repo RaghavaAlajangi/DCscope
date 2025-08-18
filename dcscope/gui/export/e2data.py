@@ -330,6 +330,10 @@ class ExportData(QtWidgets.QDialog):
             # do not allow exporting event index, since it will be
             # re-enumerated in any case.
             self.features.remove("index")
+            # do not allow exporting contour data, since that is covered
+            # by "mask" and takes ages to write/read.
+            if "contour" in self.features:
+                self.features.remove("contour")
         else:
             self.features = self.pipeline.get_features(scalar=True,
                                                        union=True,
