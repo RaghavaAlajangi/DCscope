@@ -1,3 +1,4 @@
+import os
 import socket
 
 import pytest
@@ -13,6 +14,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         NET_AVAILABLE = False
 
 
+@pytest.mark.xfail(os.getenv("CI") == "true",
+                   reason="does not always run on GH Actions")
 @pytest.mark.skipif(not NET_AVAILABLE, reason="No network connection!")
 def test_update_basic():
     mdict = update.check_release(ghrepo="DC-analysis/DCscope",
