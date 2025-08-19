@@ -5,6 +5,7 @@
  - enh: do not export "contour" to HDF5 files ("mask" is sufficient and faster)
  - docs: add missing image for data export
  - ref: only use closeEvent when exiting DCscope GUI
+ - setup: bump dclab to 0.67.0
 2.22.1
  - feat: notify user when loaded data have different pipeline hashes (#217)
  - fix: prevent accidental polygon filter creation (#148)
