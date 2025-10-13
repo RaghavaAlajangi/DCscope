@@ -1146,6 +1146,7 @@ def test_cache_selected_event_using_dataslot_issue_196(qtbot):
     qtbot.mouseClick(em1, QtCore.Qt.MouseButton.LeftButton)
 
     # did that work?
+    assert mw.pipeline.is_element_active(slot_id1, filt_id)
     assert mw.toolButton_quick_view.isChecked()
 
     # selected events
@@ -1162,8 +1163,11 @@ def test_cache_selected_event_using_dataslot_issue_196(qtbot):
     # select an event index in slot1
     qv.show_event(slot1_event)
 
+    # Get the id of the current dataset
+    ds_id1 = id(qv.rtdc_ds.hparent)
+
     # check whether event 4 is saved in cache dict
-    assert qv._dataset_event_plot_indices_cache["Dataslot_1"] == slot1_event
+    assert qv._dataset_event_plot_indices_cache[ds_id1] == slot1_event
 
     # Do we have the correct event shown?
     assert qv.spinBox_event.value()-1 == slot1_event
@@ -1178,14 +1182,18 @@ def test_cache_selected_event_using_dataslot_issue_196(qtbot):
     em2 = mw.block_matrix.get_widget(slot_id2, filt_id)
     qtbot.mouseClick(em2, QtCore.Qt.MouseButton.LeftButton)
 
+    # did that work?
+    assert mw.pipeline.is_element_active(slot_id2, filt_id)
+
     # select an event index in slot2
     qv.show_event(slot2_event)
 
     # Do we have the correct event shown?
     assert qv.spinBox_event.value()-1 == slot2_event
+    ds_id2 = id(qv.rtdc_ds.hparent)
 
     # check whether slot2_event is exists in cache dict
-    assert qv._dataset_event_plot_indices_cache["Dataslot_2"] == slot2_event
+    assert qv._dataset_event_plot_indices_cache[ds_id2] == slot2_event
 
     # now switch back to slot1 and check event
     em1 = mw.block_matrix.get_widget(slot_id1, filt_id)
@@ -1198,5 +1206,6 @@ def test_cache_selected_event_using_dataslot_issue_196(qtbot):
     # Do we still have the correct event shown?
     assert qv.spinBox_event.value()-1 == slot1_event
 
-    # check whether slot1_event is still exists in cache dict
-    assert qv._dataset_event_plot_indices_cache["Dataslot_1"] == slot1_event
+    # check whether slot1_event, slot1_even2 are still exists in cache dict
+    assert qv._dataset_event_plot_indices_cache[ds_id1] == slot1_event
+    assert qv._dataset_event_plot_indices_cache[ds_id2] == slot2_event
