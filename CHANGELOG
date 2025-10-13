@@ -1,5 +1,6 @@
-2.22.3
+2.23.3
  - fix: cache selected event per dataset in QuickView (#196)
+ - enh: add new logo (scope view and block matrix)
 2.22.2
  - fix: error message dialog limited to traceback length of three
  - fix: copy error text to clipboard did not work in error message dialog
