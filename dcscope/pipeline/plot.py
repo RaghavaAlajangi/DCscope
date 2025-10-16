@@ -44,6 +44,7 @@ DEFAULT_STATE = {
     "contour": {
         "enabled": True,
         "legend": False,  # display plot legend
+        "zoomin": False,  # enable zoom-in functionality
         "line widths": [3.0, 1.5],  # contour line widths [pt]
         "line styles": ["solid", "dashed"],
         "percentiles": [95.0, 50.0],
@@ -97,6 +98,7 @@ STATE_OPTIONS = {
     "contour": {
         "enabled":  bool,
         "legend": bool,
+        "zoomin": bool,
         "line widths": (float,),
         "line styles": (["solid", "dashed", "dotted"],),
         "percentiles": (float,),
