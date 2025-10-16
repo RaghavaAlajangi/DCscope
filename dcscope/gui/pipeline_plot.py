@@ -478,19 +478,21 @@ def add_label(text, anchor_parent, text_halign="center", text_valign="center",
 
 def zoomin_contours(dslist, plot_item, plot_state, margin_per=5):
     """Zoom-in contour data if enabled"""
-    x_min = float('inf')
-    x_max = float('-inf')
-    y_min = float('inf')
-    y_max = float('-inf')
-    # Get bounds from ALL contours at once
-    for rtdc_ds in dslist:
-        contours = compute_contours(plot_state=plot_state, rtdc_ds=rtdc_ds)
-        for contour in contours:
-            for cc in contour:
-                x_min = min(x_min, np.min(cc[:, 0]))
-                x_max = max(x_max, np.max(cc[:, 0]))
-                y_min = min(y_min, np.min(cc[:, 1]))
-                y_max = max(y_max, np.max(cc[:, 1]))
+    x_min, x_max, y_min, y_max = 0, 0, 0, 0
+    # compute all contours
+    contours_list = [compute_contours(plot_state, ds) for ds in dslist]
+
+    # flatten list of contours
+    flat_contours = [c for conts in contours_list for cont in conts
+                     for c in cont if len(c) > 0]
+    if flat_contours:
+        # concatenate all points
+        all_points = np.concatenate(flat_contours, axis=0)
+
+        x_min = np.min(all_points[:, 0])
+        x_max = np.max(all_points[:, 0])
+        y_min = np.min(all_points[:, 1])
+        y_max = np.max(all_points[:, 1])
 
     # Add margin
     x_margin = (x_max - x_min) * margin_per*0.01
