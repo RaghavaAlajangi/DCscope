@@ -1,4 +1,5 @@
 2.23.3
+ - feat: add zoom-in functionality for contour plots (#211)
  - fix: cache selected event per dataset in QuickView (#196)
  - enh: add new logo (scope view and block matrix)
 2.22.2
