@@ -539,15 +539,6 @@ def add_contour(plot_item, plot_state, rtdc_ds, slot_state, legend=None):
                   text_valign="bottom",
                   dy=-12,
                   )
-    if not con["zoomin"]:
-        # Notify the user about Zoom-In option.
-        add_label("Use 'Zoom-In' for better contour comparision.",
-                  anchor_parent=plot_item.axes["top"]["item"],
-                  font_size_diff=-1,
-                  color="red",
-                  text_halign="left",
-                  text_valign="top",
-                  )
     return elements
 
 
