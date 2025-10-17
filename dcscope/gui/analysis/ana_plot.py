@@ -118,6 +118,7 @@ class PlotPanel(QtWidgets.QWidget):
             "contour": {
                 "enabled": self.groupBox_contour.isChecked(),
                 "legend":  self.checkBox_legend.isChecked(),
+                "zoomin":  self.checkBox_zoomin.isChecked(),
                 "line widths": [self.doubleSpinBox_lw_1.value(),
                                 self.doubleSpinBox_lw_2.value(),
                                 ],

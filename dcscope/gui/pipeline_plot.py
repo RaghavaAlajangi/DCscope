@@ -361,6 +361,11 @@ class PipelinePlotItem(SimplePlotItem):
             else:
                 legend = None
             for rtdc_ds, ss in zip(dslist, slot_states):
+                if plot_state["contour"].get("zoomin", False):
+                    zoomin_contours(dslist=dslist,
+                                    plot_item=self,
+                                    plot_state=plot_state
+                                    )
                 con = add_contour(plot_item=self,
                                   rtdc_ds=rtdc_ds,
                                   plot_state=plot_state,
@@ -469,6 +474,33 @@ def add_label(text, anchor_parent, text_halign="center", text_valign="center",
     else:  # "bottom"
         y = -height/2
     label.setPos(x + dx, y + dy)
+
+
+def zoomin_contours(dslist, plot_item, plot_state, margin_per=5):
+    """Zoom-in contour data if enabled"""
+    x_min, x_max, y_min, y_max = 0, 0, 0, 0
+    # compute all contours
+    contours_list = [compute_contours(plot_state, ds) for ds in dslist]
+    # flatten list of contours
+    all_points = np.vstack([np.vstack(c) for conts in contours_list
+                            for c in conts])
+
+    if all_points.size > 0:
+        x_min = np.min(all_points[:, 0])
+        x_max = np.max(all_points[:, 0])
+        y_min = np.min(all_points[:, 1])
+        y_max = np.max(all_points[:, 1])
+
+    # Add margin
+    x_margin = (x_max - x_min) * margin_per*0.01
+    y_margin = (y_max - y_min) * margin_per*0.01
+
+    # Set view range with margins
+    plot_item.setRange(
+        xRange=(x_min - x_margin, x_max + x_margin),
+        yRange=(y_min - y_margin, y_max + y_margin),
+        padding=0
+    )
 
 
 def add_contour(plot_item, plot_state, rtdc_ds, slot_state, legend=None):
