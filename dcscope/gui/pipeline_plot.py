@@ -481,14 +481,11 @@ def zoomin_contours(dslist, plot_item, plot_state, margin_per=5):
     x_min, x_max, y_min, y_max = 0, 0, 0, 0
     # compute all contours
     contours_list = [compute_contours(plot_state, ds) for ds in dslist]
-
     # flatten list of contours
-    flat_contours = [c for conts in contours_list for cont in conts
-                     for c in cont if len(c) > 0]
-    if flat_contours:
-        # concatenate all points
-        all_points = np.concatenate(flat_contours, axis=0)
+    all_points = np.vstack([np.vstack(c) for conts in contours_list
+                            for c in conts])
 
+    if all_points.size > 0:
         x_min = np.min(all_points[:, 0])
         x_max = np.max(all_points[:, 0])
         y_min = np.min(all_points[:, 1])
